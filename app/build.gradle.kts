@@ -56,6 +56,7 @@ dependencies {
     val composeBomVersion = "2023.08.00"
     val roomVersion = "2.5.2"
     val daggerHiltVersion = "2.48"
+    val composeNavigationVersion = "2.7.1"
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -74,6 +75,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
     ksp("com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
 
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:$composeNavigationVersion")
 
     //Test dependencies
     testImplementation("junit:junit:4.13.2")
