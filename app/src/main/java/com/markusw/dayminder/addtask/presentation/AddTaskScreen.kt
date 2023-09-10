@@ -27,6 +27,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -49,11 +51,15 @@ fun AddTaskScreen(
     val datePickerState = rememberDatePickerState()
     val timePickerState = rememberTimePickerState()
     val scrollState = rememberScrollState()
-    val formattedDate = remember(datePickerState.selectedDateMillis) {
-        TimeUtils.formatDateFromTimestamp(datePickerState.selectedDateMillis?.plus(ONE_DAY))
+    val formattedDate by remember {
+        derivedStateOf {
+            TimeUtils.formatDateFromTimestamp(datePickerState.selectedDateMillis?.plus(ONE_DAY))
+        }
     }
-    val formattedTime = remember(timePickerState.hour, timePickerState.minute) {
-        TimeUtils.formatTime(timePickerState.hour, timePickerState.minute)
+    val formattedTime by remember {
+        derivedStateOf {
+            TimeUtils.formatTime(timePickerState.hour, timePickerState.minute)
+        }
     }
 
     Scaffold(
@@ -151,8 +157,6 @@ fun AddTaskScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        println("Selected date timestamp: ${datePickerState.selectedDateMillis?.plus(
-                            ONE_DAY)}")
                         onEvent(
                             AddTaskUiEvent.ChangeSelectedDate(
                                 datePickerState.selectedDateMillis?.plus(ONE_DAY)
