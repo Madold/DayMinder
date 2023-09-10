@@ -53,7 +53,7 @@ android {
 
 dependencies {
 
-    val composeBomVersion = "2023.08.00"
+    val composeBomVersion = "2023.09.00"
     val roomVersion = "2.5.2"
     val daggerHiltVersion = "2.48"
     val composeNavigationVersion = "2.7.1"

@@ -10,10 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +28,7 @@ class AddTaskViewModel @Inject constructor(
     val taskEvents = taskEventChannel.receiveAsFlow()
 
     fun onEvent(event: AddTaskUiEvent) {
-        when(event) {
+        when (event) {
             is AddTaskUiEvent.ChangeTaskDescription -> {
                 _uiState.update { it.copy(taskDescription = event.taskDescription) }
             }
@@ -66,6 +64,34 @@ class AddTaskViewModel @Inject constructor(
                     taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
                 }
 
+            }
+
+            is AddTaskUiEvent.HideDatePicker -> {
+                _uiState.update { it.copy(isDatePickerVisible = false) }
+            }
+
+            is AddTaskUiEvent.HideTimePicker -> {
+                _uiState.update { it.copy(isTimePickerVisible = false) }
+            }
+
+            is AddTaskUiEvent.ShowDatePicker -> {
+                _uiState.update { it.copy(isDatePickerVisible = true) }
+            }
+
+            is AddTaskUiEvent.ShowTimePicker -> {
+                _uiState.update { it.copy(isTimePickerVisible = true) }
+            }
+
+            is AddTaskUiEvent.ChangeSelectedDate -> {
+                _uiState.update { it.copy(selectedDateInMillis = event.selectedDateInMillis) }
+            }
+
+            is AddTaskUiEvent.ChangeSelectedHour -> {
+                _uiState.update { it.copy(selectedHour = event.selectedHour) }
+            }
+
+            is AddTaskUiEvent.ChangeSelectedMinute -> {
+                _uiState.update { it.copy(selectedMinute = event.selectedMinute) }
             }
         }
     }
