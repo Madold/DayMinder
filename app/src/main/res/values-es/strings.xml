@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="task_title">Título de la tarea</string>
+    <string name="task_description">Descripción</string>
+    <string name="add_task">Crear tarea</string>
+    <string name="title_blank_error">El título no puede estar en blanco.</string>
+    <string name="create_task">Crear tarea</string>
+</resources>

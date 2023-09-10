@@ -4,14 +4,10 @@ package com.markusw.dayminder.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.markusw.dayminder.core.utils.TimeUtils
-import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.home.domain.use_cases.DeleteTask
 import com.markusw.dayminder.home.domain.use_cases.GetTaskOrderedByTimestamp
 import com.markusw.dayminder.home.domain.use_cases.GetTaskOrderedByTitle
-import com.markusw.dayminder.addtask.domain.use_cases.InsertTask
-import com.markusw.dayminder.core.domain.use_cases.ValidateTaskTitle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,10 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val deleteTask: DeleteTask,
-    private val insertTask: InsertTask,
     private val getTaskOrderedByTitle: GetTaskOrderedByTitle,
     private val getTaskOrderedByTimestamp: GetTaskOrderedByTimestamp,
-    private val validateTaskTitle: ValidateTaskTitle
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeState())
@@ -54,49 +48,6 @@ class HomeViewModel @Inject constructor(
                 _sortType.update { event.sortType }
             }
 
-            is HomeUiEvent.ShowAddTaskDialog -> {
-                _uiState.update { it.copy(isAddTaskDialogVisible = true) }
-            }
-
-            is HomeUiEvent.ChangeTaskDescription -> {
-                _uiState.update { it.copy(taskDescription = event.description) }
-            }
-
-            is HomeUiEvent.ChangeTaskTitle -> {
-                _uiState.update { it.copy(taskTitle = event.title) }
-            }
-
-            is HomeUiEvent.AddTask -> {
-                val title = _uiState.value.taskTitle
-                val description = _uiState.value.taskDescription
-                val titleValidationResult = validateTaskTitle(title)
-
-                if (!titleValidationResult.success) {
-                    _uiState.update {
-                        it.copy(
-                            taskTitleError = titleValidationResult.errorMessage
-                        )
-                    }
-                    return
-                }
-
-                resetTaskFields()
-
-                viewModelScope.launch(Dispatchers.IO) {
-                    insertTask(
-                        Task(
-                            title = title,
-                            description = description,
-                            timestamp = TimeUtils.getDeviceHourInTimestamp()
-                        )
-                    )
-                }
-            }
-
-            is HomeUiEvent.DismissAddTaskDialog -> {
-                _uiState.update { it.copy(isAddTaskDialogVisible = false) }
-            }
-
             is HomeUiEvent.DeleteTask -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     deleteTask(event.task)
@@ -105,14 +56,5 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun resetTaskFields() {
-        _uiState.update {
-            it.copy(
-                taskTitle = "",
-                taskDescription = "",
-                isAddTaskDialogVisible = false,
-            )
-        }
-    }
 
 }

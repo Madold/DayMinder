@@ -58,10 +58,10 @@ dependencies {
     val daggerHiltVersion = "2.48"
     val composeNavigationVersion = "2.7.1"
     val hiltNavigationComposeVersion = "1.0.0"
-    val lifecyleRuntimeComposeVersion = "2.6.2"
+    val lifecycleRuntimeComposeVersion = "2.6.2"
 
     implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
     implementation("androidx.compose.ui:ui")
@@ -83,7 +83,7 @@ dependencies {
     //Hilt Navigation Compose
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecyleRuntimeComposeVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleRuntimeComposeVersion")
 
 
     //Test dependencies

@@ -19,12 +19,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.markusw.dayminder.home.presentation.composables.AddTaskDialog
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.markusw.dayminder.core.presentation.Screens
 
 @Composable
 fun HomeScreen(
     state: HomeState,
-    onEvent: (HomeUiEvent) -> Unit = {}
+    navController: NavController,
+    onEvent: (HomeUiEvent) -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -51,7 +54,9 @@ fun HomeScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { onEvent(HomeUiEvent.ShowAddTaskDialog) },
+                onClick = {
+                    navController.navigate(Screens.AddTask.route)
+                },
                 content = {
                     Icon(
                         imageVector = Icons.Default.Add,
@@ -78,14 +83,6 @@ fun HomeScreen(
                         }
                     }
                 }
-            }
-
-            if (state.isAddTaskDialogVisible) {
-                AddTaskDialog(
-                    taskTitle = state.taskTitle,
-                    taskDescription = state.taskDescription,
-                    onEvent = onEvent
-                )
             }
         }
     )
