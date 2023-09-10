@@ -6,8 +6,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
@@ -106,8 +104,6 @@ fun AddTaskScreen(
                         return@Button
                     }
                 }
-
-
 
             }) {
                 Text(text = stringResource(id = R.string.create_task))

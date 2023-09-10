@@ -84,9 +84,12 @@ fun AppNavHost(
                             Manifest.permission.POST_NOTIFICATIONS -> {
                                 PostNotificationsPermissionProvider()
                             }
+
                             else -> return@forEach
                         },
-                        isPermanentlyDeclined = (context as Activity).shouldShowRequestPermissionRationale(permission).not(),
+                        isPermanentlyDeclined = (context as Activity).shouldShowRequestPermissionRationale(
+                            permission
+                        ).not(),
                         onDismiss = viewModel::dismissDialog,
                         onDone = {
                             viewModel.dismissDialog()
