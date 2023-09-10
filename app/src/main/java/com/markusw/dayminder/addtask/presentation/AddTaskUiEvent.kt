@@ -11,6 +11,7 @@ sealed interface AddTaskUiEvent {
     data class ChangeSelectedDate(val selectedDateInMillis: Long?) : AddTaskUiEvent
     data class ChangeSelectedHour(val selectedHour: Int?) : AddTaskUiEvent
     data class ChangeSelectedMinute(val selectedMinute: Int?) : AddTaskUiEvent
+    data class ChangeTaskScheduled(val scheduled: Boolean) : AddTaskUiEvent
 
 
 }

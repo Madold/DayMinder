@@ -11,4 +11,5 @@ data class AddTaskState(
     val selectedDateInMillis: Long? = null,
     val selectedHour: Int? = null,
     val selectedMinute: Int? = null,
+    val isTaskScheduled: Boolean = false,
 )

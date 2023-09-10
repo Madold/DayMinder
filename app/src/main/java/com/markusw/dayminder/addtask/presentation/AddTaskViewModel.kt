@@ -93,6 +93,10 @@ class AddTaskViewModel @Inject constructor(
             is AddTaskUiEvent.ChangeSelectedMinute -> {
                 _uiState.update { it.copy(selectedMinute = event.selectedMinute) }
             }
+
+            is AddTaskUiEvent.ChangeTaskScheduled -> {
+                _uiState.update { it.copy(isTaskScheduled = event.scheduled) }
+            }
         }
     }
 

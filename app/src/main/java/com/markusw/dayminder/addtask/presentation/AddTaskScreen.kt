@@ -25,6 +25,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -117,46 +118,55 @@ fun AddTaskScreen(
                     },
                     maxLines = 5
                 )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Column(
-                        modifier = Modifier.weight(1f)
+                Text(stringResource(id = R.string.remember))
+                Switch(
+                    checked = state.isTaskScheduled,
+                    onCheckedChange = {
+                        onEvent(AddTaskUiEvent.ChangeTaskScheduled(it))
+                    }
+                )
+                AnimatedVisibility(visible = state.isTaskScheduled) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
                     ) {
-                        Text(text = stringResource(id = R.string.date))
-                        OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowDatePicker) }) {
-                            Icon(
-                                imageVector = Icons.Default.DateRange,
-                                contentDescription = null
-                            )
-                            AnimatedVisibility(
-                                visible = formattedDate.isNotEmpty(),
-                                enter = fadeIn(
-                                    animationSpec = tween(
-                                        delayMillis = 200,
-                                        durationMillis = 500
-                                    )
-                                ) + expandHorizontally(
-                                    animationSpec = tween(
-                                        delayMillis = 200,
-                                        durationMillis = 500
-                                    )
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(text = stringResource(id = R.string.date))
+                            OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowDatePicker) }) {
+                                Icon(
+                                    imageVector = Icons.Default.DateRange,
+                                    contentDescription = null
                                 )
-                            ) {
-                                Text(text = formattedDate)
+                                AnimatedVisibility(
+                                    visible = formattedDate.isNotEmpty(),
+                                    enter = fadeIn(
+                                        animationSpec = tween(
+                                            delayMillis = 200,
+                                            durationMillis = 500
+                                        )
+                                    ) + expandHorizontally(
+                                        animationSpec = tween(
+                                            delayMillis = 200,
+                                            durationMillis = 500
+                                        )
+                                    )
+                                ) {
+                                    Text(text = formattedDate)
+                                }
                             }
                         }
-                    }
-                    Column(
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(text = stringResource(id = R.string.time))
-                        OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowTimePicker) }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_clock),
-                                contentDescription = null
-                            )
-                            Text(text = formattedTime)
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(text = stringResource(id = R.string.time))
+                            OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowTimePicker) }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_clock),
+                                    contentDescription = null
+                                )
+                                Text(text = formattedTime)
+                            }
                         }
                     }
                 }
