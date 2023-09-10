@@ -1,4 +1,4 @@
-package com.markusw.dayminder.home.domain.use_cases
+package com.markusw.dayminder.core.domain.use_cases
 
 import com.markusw.dayminder.core.domain.ValidationResult
 import javax.inject.Inject

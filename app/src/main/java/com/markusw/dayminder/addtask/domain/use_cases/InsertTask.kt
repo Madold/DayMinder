@@ -1,4 +1,4 @@
-package com.markusw.dayminder.home.domain.use_cases
+package com.markusw.dayminder.addtask.domain.use_cases
 
 import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.core.domain.model.toEntity

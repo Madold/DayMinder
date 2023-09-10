@@ -10,8 +10,8 @@ import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.home.domain.use_cases.DeleteTask
 import com.markusw.dayminder.home.domain.use_cases.GetTaskOrderedByTimestamp
 import com.markusw.dayminder.home.domain.use_cases.GetTaskOrderedByTitle
-import com.markusw.dayminder.home.domain.use_cases.InsertTask
-import com.markusw.dayminder.home.domain.use_cases.ValidateTaskTitle
+import com.markusw.dayminder.addtask.domain.use_cases.InsertTask
+import com.markusw.dayminder.core.domain.use_cases.ValidateTaskTitle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
