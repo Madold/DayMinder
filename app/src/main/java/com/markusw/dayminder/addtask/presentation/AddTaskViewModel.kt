@@ -1,5 +1,6 @@
 package com.markusw.dayminder.addtask.presentation
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.markusw.dayminder.addtask.domain.use_cases.InsertTask
@@ -26,6 +27,7 @@ class AddTaskViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
     private val taskEventChannel = Channel<AddTaskEvent>()
     val taskEvents = taskEventChannel.receiveAsFlow()
+    val visiblePermissionDialogQueue = mutableStateListOf<String>()
 
     fun onEvent(event: AddTaskUiEvent) {
         when (event) {
@@ -99,7 +101,6 @@ class AddTaskViewModel @Inject constructor(
             }
         }
     }
-
     private fun resetTaskFields() {
         _uiState.update {
             it.copy(
@@ -107,6 +108,16 @@ class AddTaskViewModel @Inject constructor(
                 taskDescription = "",
                 taskTitleError = null,
             )
+        }
+    }
+
+    fun dismissDialog() {
+        visiblePermissionDialogQueue.removeFirst()
+    }
+
+    fun onPermissionResult(permission: String, isGranted: Boolean) {
+        if (!isGranted) {
+            visiblePermissionDialogQueue.add(permission)
         }
     }
 

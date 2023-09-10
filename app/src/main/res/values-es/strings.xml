@@ -13,4 +13,8 @@
     <string name="dismiss">Ocultar</string>
     <string name="confirm">Confirmar</string>
     <string name="remember">Recordar</string>
+    <string name="post_notification_permission_denied">Para recordarte tus tareas programadas, necesitamos tu permiso para enviar notificaciones. Por favor, permítenos ayudarte a mantenerte organizado. </string>
+    <string name="post_notification_permission_permanently_denied">Lamentablemente, has decidido denegar permanentemente el permiso de enviar notificaciones. Sin este permiso, no podremos recordarte tus tareas programadas de manera efectiva. Si cambias de opinión en el futuro y deseas recibir recordatorios, puedes habilitar esta función en la configuración de tu dispositivo. Estamos aquí para ayudarte cuando estés listo.</string>
+    <string name="permission_required">Permiso requerido</string>
+    <string name="grant_permission">Conceder permiso</string>
 </resources>

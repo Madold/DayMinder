@@ -2,6 +2,12 @@
 
 package com.markusw.dayminder.addtask.presentation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
@@ -35,9 +41,11 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.example.dayminder.R
 import com.markusw.dayminder.core.presentation.composables.TimePickerDialog
@@ -49,12 +57,15 @@ private const val ONE_DAY = 86400000L
 fun AddTaskScreen(
     state: AddTaskState,
     navController: NavController,
+    permissionLauncher: ManagedActivityResultLauncher<String, Boolean>,
     onEvent: (AddTaskUiEvent) -> Unit = {},
 ) {
 
     val datePickerState = rememberDatePickerState()
     val timePickerState = rememberTimePickerState()
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
+
     val formattedDate by remember {
         derivedStateOf {
             TimeUtils.formatDateFromTimestamp(datePickerState.selectedDateMillis?.plus(ONE_DAY))
@@ -83,7 +94,22 @@ fun AddTaskScreen(
             )
         },
         bottomBar = {
-            Button(onClick = { onEvent(AddTaskUiEvent.SaveTask) }) {
+            Button(onClick = {
+                if (!state.isTaskScheduled) {
+                    onEvent(AddTaskUiEvent.SaveTask)
+                    return@Button
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                        permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        return@Button
+                    }
+                }
+
+
+
+            }) {
                 Text(text = stringResource(id = R.string.create_task))
             }
         },
