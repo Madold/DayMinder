@@ -39,6 +39,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -56,11 +57,11 @@ dependencies {
     val composeBomVersion = "2023.09.00"
     val roomVersion = "2.5.2"
     val daggerHiltVersion = "2.48"
-    val composeNavigationVersion = "2.7.1"
+    val composeNavigationVersion = "2.7.2"
     val hiltNavigationComposeVersion = "1.0.0"
     val lifecycleRuntimeComposeVersion = "2.6.2"
 
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
