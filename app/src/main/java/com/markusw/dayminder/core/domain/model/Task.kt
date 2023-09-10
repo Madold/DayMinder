@@ -1,4 +1,4 @@
-package com.markusw.dayminder.core.domain
+package com.markusw.dayminder.core.domain.model
 
 import com.markusw.dayminder.core.data.model.TaskEntity
 

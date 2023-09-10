@@ -1,6 +1,6 @@
 package com.markusw.dayminder.home.presentation
 
-import com.markusw.dayminder.core.domain.Task
+import com.markusw.dayminder.core.domain.model.Task
 
 data class HomeState(
     val taskTitle: String = "",

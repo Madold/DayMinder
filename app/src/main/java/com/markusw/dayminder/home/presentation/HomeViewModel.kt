@@ -5,8 +5,8 @@ package com.markusw.dayminder.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.markusw.dayminder.core.utils.TimeUtils
-import com.markusw.dayminder.core.domain.Task
-import com.markusw.dayminder.core.domain.toDomain
+import com.markusw.dayminder.core.domain.model.Task
+import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.home.domain.use_cases.DeleteTask
 import com.markusw.dayminder.home.domain.use_cases.GetTaskOrderedByTimestamp
 import com.markusw.dayminder.home.domain.use_cases.GetTaskOrderedByTitle

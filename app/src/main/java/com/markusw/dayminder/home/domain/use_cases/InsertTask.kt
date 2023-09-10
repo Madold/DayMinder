@@ -1,7 +1,7 @@
 package com.markusw.dayminder.home.domain.use_cases
 
-import com.markusw.dayminder.core.domain.Task
-import com.markusw.dayminder.core.domain.toEntity
+import com.markusw.dayminder.core.domain.model.Task
+import com.markusw.dayminder.core.domain.model.toEntity
 import com.markusw.dayminder.core.domain.repository.TasksRepository
 import javax.inject.Inject
 
