@@ -1,9 +1,8 @@
 package com.markusw.dayminder.home.domain.use_cases
 
-import com.markusw.dayminder.home.data.model.TaskEntity
-import com.markusw.dayminder.home.domain.model.Task
-import com.markusw.dayminder.home.domain.model.toEntity
-import com.markusw.dayminder.home.domain.repository.TasksRepository
+import com.markusw.dayminder.core.domain.Task
+import com.markusw.dayminder.core.domain.toEntity
+import com.markusw.dayminder.core.domain.repository.TasksRepository
 import javax.inject.Inject
 
 class InsertTask @Inject constructor(

@@ -1,8 +1,8 @@
-package com.markusw.dayminder.home.data.repository
+package com.markusw.dayminder.core.data.repository
 
-import com.markusw.dayminder.home.data.database.TaskDao
-import com.markusw.dayminder.home.data.model.TaskEntity
-import com.markusw.dayminder.home.domain.repository.TasksRepository
+import com.markusw.dayminder.core.data.database.TaskDao
+import com.markusw.dayminder.core.data.model.TaskEntity
+import com.markusw.dayminder.core.domain.repository.TasksRepository
 import javax.inject.Inject
 
 class AndroidTaskRepository @Inject constructor(

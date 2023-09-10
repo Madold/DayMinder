@@ -1,4 +1,4 @@
-package com.markusw.dayminder.home.data.model
+package com.markusw.dayminder.core.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

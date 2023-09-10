@@ -1,7 +1,6 @@
-package com.markusw.dayminder.home.domain.repository
+package com.markusw.dayminder.core.domain.repository
 
-import com.markusw.dayminder.home.data.model.TaskEntity
-import com.markusw.dayminder.home.domain.model.Task
+import com.markusw.dayminder.core.data.model.TaskEntity
 import kotlinx.coroutines.flow.Flow
 
 interface TasksRepository {

@@ -1,11 +1,11 @@
-package com.markusw.dayminder.home.data.database
+package com.markusw.dayminder.core.data.database
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.markusw.dayminder.core.Constants.TASK_TABLE_NAME
-import com.markusw.dayminder.home.data.model.TaskEntity
+import com.markusw.dayminder.core.data.model.TaskEntity
 import kotlinx.coroutines.flow.Flow
 
 

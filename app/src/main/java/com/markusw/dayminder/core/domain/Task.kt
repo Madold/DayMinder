@@ -1,6 +1,6 @@
-package com.markusw.dayminder.home.domain.model
+package com.markusw.dayminder.core.domain
 
-import com.markusw.dayminder.home.data.model.TaskEntity
+import com.markusw.dayminder.core.data.model.TaskEntity
 
 data class Task(
     val id: Int = 0,

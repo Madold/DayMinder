@@ -1,6 +1,6 @@
 package com.markusw.dayminder.home.presentation
 
-import com.markusw.dayminder.home.domain.model.Task
+import com.markusw.dayminder.core.domain.Task
 
 sealed interface HomeUiEvent {
 
