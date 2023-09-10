@@ -6,4 +6,10 @@
     <string name="add_task">Crear tarea</string>
     <string name="title_blank_error">El título no puede estar en blanco.</string>
     <string name="create_task">Crear tarea</string>
+    <string name="date">Fecha</string>
+    <string name="time">Hora</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="dismiss">Ocultar</string>
+    <string name="confirm">Confirmar</string>
 </resources>

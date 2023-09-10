@@ -3,6 +3,9 @@
 package com.markusw.dayminder.addtask.presentation
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -120,13 +123,26 @@ fun AddTaskScreen(
                     Column(
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text(text = "Date")
+                        Text(text = stringResource(id = R.string.date))
                         OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowDatePicker) }) {
                             Icon(
                                 imageVector = Icons.Default.DateRange,
                                 contentDescription = null
                             )
-                            AnimatedVisibility(visible = formattedDate.isNotEmpty()) {
+                            AnimatedVisibility(
+                                visible = formattedDate.isNotEmpty(),
+                                enter = fadeIn(
+                                    animationSpec = tween(
+                                        delayMillis = 200,
+                                        durationMillis = 500
+                                    )
+                                ) + expandHorizontally(
+                                    animationSpec = tween(
+                                        delayMillis = 200,
+                                        durationMillis = 500
+                                    )
+                                )
+                            ) {
                                 Text(text = formattedDate)
                             }
                         }
@@ -134,15 +150,13 @@ fun AddTaskScreen(
                     Column(
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text(text = "Time")
+                        Text(text = stringResource(id = R.string.time))
                         OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowTimePicker) }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_clock),
                                 contentDescription = null
                             )
-                            AnimatedVisibility(visible = formattedTime.isNotEmpty()) {
-                                Text(text = formattedTime)
-                            }
+                            Text(text = formattedTime)
                         }
                     }
                 }
@@ -166,14 +180,14 @@ fun AddTaskScreen(
                     },
                     enabled = datePickerState.selectedDateMillis != null
                 ) {
-                    Text("OK")
+                    Text(stringResource(id = R.string.OK))
                 }
             },
             dismissButton = {
                 TextButton(
                     onClick = { onEvent(AddTaskUiEvent.HideDatePicker) }
                 ) {
-                    Text("Cancel")
+                    Text(stringResource(id = R.string.cancel))
                 }
             }
         ) {
@@ -186,7 +200,6 @@ fun AddTaskScreen(
             state = timePickerState,
             onConfirmButtonClick = {
                 onEvent(AddTaskUiEvent.HideTimePicker)
-                println("Selected time: ${timePickerState.hour} : ${timePickerState.minute}")
             },
             onDismissButtonClick = {
                 onEvent(AddTaskUiEvent.HideTimePicker)

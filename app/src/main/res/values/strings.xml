@@ -5,4 +5,10 @@
     <string name="add_task">Add task</string>
     <string name="title_blank_error">Title can\'t be blank.</string>
     <string name="create_task">Create task</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="confirm">Confirm</string>
 </resources>

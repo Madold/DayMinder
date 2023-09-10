@@ -22,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.dayminder.R
 
 @Composable
 fun TimePickerDialog(
@@ -67,12 +69,12 @@ fun TimePickerDialog(
                 horizontalArrangement = Arrangement.End
             ) {
                 TextButton(onClick = onDismissButtonClick) {
-                    Text(text = "Dismiss")
+                    Text(text = stringResource(id = R.string.dismiss))
                 }
                 TextButton(
                     onClick = onConfirmButtonClick
                 ) {
-                    Text(text = "Confirm")
+                    Text(text = stringResource(id = R.string.confirm))
                 }
             }
         }
