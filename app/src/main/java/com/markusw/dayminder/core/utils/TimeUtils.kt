@@ -1,9 +1,9 @@
 package com.markusw.dayminder.core.utils
 
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 
 object TimeUtils {
 
@@ -28,10 +28,10 @@ object TimeUtils {
     fun formatDateFromTimestamp(timestamp: Long?): String {
         if (timestamp == null) return ""
 
-        val instant = Instant.ofEpochMilli(timestamp)
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        val zonedDateTime = instant.atZone(ZoneId.systemDefault())
-        return formatter.format(zonedDateTime)
+        val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        dateFormatter.timeZone = TimeZone.getTimeZone("GMT")
+
+        return dateFormatter.format(timestamp)
     }
 
 }

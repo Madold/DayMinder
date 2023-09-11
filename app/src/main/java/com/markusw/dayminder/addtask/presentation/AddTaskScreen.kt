@@ -48,8 +48,7 @@ import androidx.navigation.NavController
 import com.example.dayminder.R
 import com.markusw.dayminder.core.presentation.composables.TimePickerDialog
 import com.markusw.dayminder.core.utils.TimeUtils
-
-private const val ONE_DAY = 86400000L
+import timber.log.Timber
 
 @Composable
 fun AddTaskScreen(
@@ -66,7 +65,7 @@ fun AddTaskScreen(
 
     val formattedDate by remember {
         derivedStateOf {
-            TimeUtils.formatDateFromTimestamp(datePickerState.selectedDateMillis?.plus(ONE_DAY))
+            TimeUtils.formatDateFromTimestamp(datePickerState.selectedDateMillis)
         }
     }
     val formattedTime by remember {
@@ -203,9 +202,10 @@ fun AddTaskScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
+                        Timber.d("Selected date: ${datePickerState.selectedDateMillis}")
                         onEvent(
                             AddTaskUiEvent.ChangeSelectedDate(
-                                datePickerState.selectedDateMillis?.plus(ONE_DAY)
+                                datePickerState.selectedDateMillis
                             )
                         )
                         onEvent(AddTaskUiEvent.HideDatePicker)
