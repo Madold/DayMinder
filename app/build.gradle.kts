@@ -60,6 +60,8 @@ dependencies {
     val composeNavigationVersion = "2.7.2"
     val hiltNavigationComposeVersion = "1.0.0"
     val lifecycleRuntimeComposeVersion = "2.6.2"
+    val timberVersion = "5.0.1"
+    val loggerVersion = "2.2.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -84,7 +86,14 @@ dependencies {
     //Hilt Navigation Compose
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
+    //Lifecycle runtime
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleRuntimeComposeVersion")
+
+    //Timber
+    implementation("com.jakewharton.timber:timber:$timberVersion")
+
+    //Logger
+    implementation("com.orhanobut:logger:$loggerVersion")
 
 
     //Test dependencies
