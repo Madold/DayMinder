@@ -1,5 +1,6 @@
 package com.markusw.dayminder.core.utils
 
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -32,6 +33,22 @@ object TimeUtils {
         dateFormatter.timeZone = TimeZone.getTimeZone("GMT")
 
         return dateFormatter.format(timestamp)
+    }
+
+    fun computeTimeStamp(dateInMillis: Long, hour: Int, minute: Int): Long {
+
+        Timber.d("Computing timestamp for date: $dateInMillis, hour: $hour, minute: $minute")
+
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"))
+
+        calendar.timeInMillis = dateInMillis
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+
+        Timber.d("Computed timestamp: ${calendar.timeInMillis}")
+
+        return calendar.timeInMillis
     }
 
 }

@@ -1,6 +1,8 @@
 package com.markusw.dayminder
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import com.example.dayminder.BuildConfig
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -10,6 +12,12 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class DayMinder : Application() {
+
+    companion object {
+        const val SCHEDULED_NOTIFICATIONS_CHANNEL_ID = "scheduled_notifications"
+        const val SCHEDULED_NOTIFICATIONS_CHANNEL_NAME = "Scheduled notifications"
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -17,6 +25,7 @@ class DayMinder : Application() {
             setupTimber()
         }
 
+        setupNotificationChannels()
     }
 
     private fun setupTimber() {
@@ -34,6 +43,19 @@ class DayMinder : Application() {
         })
 
         Timber.d("Starting app...")
+    }
+
+    private fun setupNotificationChannels() {
+        val scheduledNotificationsChannel = NotificationChannel(
+            SCHEDULED_NOTIFICATIONS_CHANNEL_ID,
+            SCHEDULED_NOTIFICATIONS_CHANNEL_NAME,
+            NotificationManager.IMPORTANCE_DEFAULT
+        ).apply {
+            enableVibration(true)
+        }
+
+        val notificationManager = getSystemService(NotificationManager::class.java)
+        notificationManager.createNotificationChannel(scheduledNotificationsChannel)
     }
 
 }

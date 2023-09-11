@@ -57,7 +57,9 @@ fun AddTaskScreen(
     onEvent: (AddTaskUiEvent) -> Unit = {},
 ) {
 
-    val datePickerState = rememberDatePickerState()
+    val datePickerState = rememberDatePickerState(
+        initialSelectedDateMillis = System.currentTimeMillis()
+    )
     val timePickerState = rememberTimePickerState()
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -102,6 +104,8 @@ fun AddTaskScreen(
                         return@Button
                     }
                 }
+
+                onEvent(AddTaskUiEvent.SaveTask)
 
             }) {
                 Text(text = stringResource(id = R.string.create_task))
@@ -203,7 +207,7 @@ fun AddTaskScreen(
                     onClick = {
                         onEvent(
                             AddTaskUiEvent.ChangeSelectedDate(
-                                datePickerState.selectedDateMillis
+                                datePickerState.selectedDateMillis!!
                             )
                         )
                         onEvent(AddTaskUiEvent.HideDatePicker)
@@ -229,6 +233,16 @@ fun AddTaskScreen(
         TimePickerDialog(
             state = timePickerState,
             onConfirmButtonClick = {
+                onEvent(
+                    AddTaskUiEvent.ChangeSelectedHour(
+                        timePickerState.hour
+                    )
+                )
+                onEvent(
+                    AddTaskUiEvent.ChangeSelectedMinute(
+                        timePickerState.minute
+                    )
+                )
                 onEvent(AddTaskUiEvent.HideTimePicker)
             },
             onDismissButtonClick = {

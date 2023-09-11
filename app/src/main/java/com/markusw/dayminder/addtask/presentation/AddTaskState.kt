@@ -8,8 +8,8 @@ data class AddTaskState(
     val taskDescription: String = "",
     val isTimePickerVisible: Boolean = false,
     val isDatePickerVisible: Boolean = false,
-    val selectedDateInMillis: Long? = null,
-    val selectedHour: Int? = null,
-    val selectedMinute: Int? = null,
+    val selectedDateInMillis: Long = System.currentTimeMillis(),
+    val selectedHour: Int = 0,
+    val selectedMinute: Int = 0,
     val isTaskScheduled: Boolean = false,
 )

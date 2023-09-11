@@ -3,6 +3,8 @@ package com.markusw.dayminder.addtask.presentation
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.markusw.dayminder.addtask.domain.NotificationItem
+import com.markusw.dayminder.addtask.domain.NotificationSchedulerService
 import com.markusw.dayminder.addtask.domain.use_cases.InsertTask
 import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.core.domain.use_cases.ValidateTaskTitle
@@ -15,12 +17,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
     private val insertTask: InsertTask,
-    private val validateTaskTitle: ValidateTaskTitle
+    private val validateTaskTitle: ValidateTaskTitle,
+    private val notificationSchedulerService: NotificationSchedulerService
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddTaskState())
@@ -43,6 +47,7 @@ class AddTaskViewModel @Inject constructor(
                 val taskTitle = _uiState.value.taskTitle
                 val taskDescription = _uiState.value.taskDescription
                 val taskTitleValidationResult = validateTaskTitle(taskTitle)
+                val isTaskScheduled = _uiState.value.isTaskScheduled
 
                 if (!taskTitleValidationResult.success) {
                     _uiState.update {
@@ -51,6 +56,25 @@ class AddTaskViewModel @Inject constructor(
                         )
                     }
                     return
+                }
+
+                if (isTaskScheduled) {
+                    val endDateTimestamp = _uiState.value.selectedDateInMillis
+                    val hour = _uiState.value.selectedHour
+                    val minute = _uiState.value.selectedMinute
+
+                    notificationSchedulerService.scheduleNotification(
+                        NotificationItem(
+                            id = UUID.randomUUID().hashCode(),
+                            title = taskTitle,
+                            message = taskDescription,
+                            timestamp = TimeUtils.computeTimeStamp(
+                                endDateTimestamp,
+                                hour,
+                                minute
+                            )
+                        )
+                    )
                 }
 
                 resetTaskFields()
@@ -101,6 +125,7 @@ class AddTaskViewModel @Inject constructor(
             }
         }
     }
+
     private fun resetTaskFields() {
         _uiState.update {
             it.copy(
