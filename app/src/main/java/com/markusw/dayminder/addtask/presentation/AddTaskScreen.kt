@@ -48,7 +48,6 @@ import androidx.navigation.NavController
 import com.example.dayminder.R
 import com.markusw.dayminder.core.presentation.composables.TimePickerDialog
 import com.markusw.dayminder.core.utils.TimeUtils
-import timber.log.Timber
 
 @Composable
 fun AddTaskScreen(
