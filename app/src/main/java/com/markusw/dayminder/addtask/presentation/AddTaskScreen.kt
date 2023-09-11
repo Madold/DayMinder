@@ -202,7 +202,6 @@ fun AddTaskScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        Timber.d("Selected date: ${datePickerState.selectedDateMillis}")
                         onEvent(
                             AddTaskUiEvent.ChangeSelectedDate(
                                 datePickerState.selectedDateMillis
