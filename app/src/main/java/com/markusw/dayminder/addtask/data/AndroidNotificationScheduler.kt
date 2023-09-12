@@ -7,9 +7,6 @@ import android.content.Intent
 import com.markusw.dayminder.addtask.domain.NotificationItem
 import com.markusw.dayminder.addtask.domain.NotificationSchedulerService
 import timber.log.Timber
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.Calendar
 import java.util.TimeZone
 
 class AndroidNotificationScheduler(private val context: Context) : NotificationSchedulerService {
