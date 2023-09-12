@@ -19,8 +19,6 @@ class AndroidNotificationScheduler(private val context: Context) : NotificationS
         val offset = localZone.getOffset(timestampGMT)
         val localTimestamp = timestampGMT - offset
 
-        Timber.d("Scheduling notification for ${item.title} at $localTimestamp")
-
         val intent = Intent(context, NotificationReceiver::class.java).apply {
             putExtra(NotificationItem.TITLE, item.title)
             putExtra(NotificationItem.MESSAGE, item.message)
