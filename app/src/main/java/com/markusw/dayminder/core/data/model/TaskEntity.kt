@@ -11,6 +11,7 @@ data class TaskEntity(
     val title: String,
     val description: String,
     val timestamp: Long,
-    val isDone: Boolean = false,
-    val isScheduled: Boolean = false
+    val isDone: Boolean,
+    val isScheduled: Boolean,
+    val importance: Int
 )

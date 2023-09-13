@@ -23,7 +23,8 @@ fun Task.toEntity() = TaskEntity(
     description = description,
     timestamp = timestamp,
     isDone = isDone,
-    isScheduled = isScheduled
+    isScheduled = isScheduled,
+    importance = importance
 )
 
 fun TaskEntity.toDomain() = Task(
@@ -32,5 +33,6 @@ fun TaskEntity.toDomain() = Task(
     description = description,
     timestamp = timestamp,
     isDone = isDone,
-    isScheduled = isScheduled
+    isScheduled = isScheduled,
+    importance = importance
 )
