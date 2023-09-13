@@ -153,7 +153,11 @@ private fun TaskToggle(
         ),
         onClick = { }
     ) {
-        AnimatedVisibility(visible = isDone, enter = fadeIn(), exit = fadeOut()) {
+        AnimatedVisibility(
+            visible = isDone,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_check),
                 contentDescription = null,
@@ -177,8 +181,8 @@ private fun TaskItemPreview() {
                description = "Description 1",
                timestamp = TimeUtils.getDeviceHourInTimestamp(),
                isDone = true,
-               isScheduled = true,
-               importance = Task.IMPORTANCE_HIGH
+               isScheduled = false,
+               importance = Task.IMPORTANCE_NORMAL
            ),
            onEvent = {
 
