@@ -3,6 +3,7 @@ package com.markusw.dayminder.core.utils
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
@@ -49,6 +50,14 @@ object TimeUtils {
         Timber.d("Computed timestamp: ${calendar.timeInMillis}")
 
         return calendar.timeInMillis
+    }
+
+    fun formatHourFromTimestamp(timestamp: Long): String {
+        val date = Date(timestamp)
+        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        sdf.timeZone = TimeZone.getTimeZone("GMT")
+
+        return sdf.format(date)
     }
 
 }

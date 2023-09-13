@@ -84,7 +84,9 @@ class AddTaskViewModel @Inject constructor(
                         Task(
                             title = taskTitle,
                             description = taskDescription,
-                            timestamp = TimeUtils.getDeviceHourInTimestamp()
+                            timestamp = TimeUtils.getDeviceHourInTimestamp(),
+                            isDone = false,
+                            isScheduled = isTaskScheduled
                         )
                     )
                     taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
