@@ -4,5 +4,5 @@ import com.markusw.dayminder.core.domain.model.Task
 
 data class HomeState(
     val taskList: List<Task> = listOf(),
-    val sortType: SortType = SortType.Title,
+    val sortType: SortType = SortType.MyDay,
 )

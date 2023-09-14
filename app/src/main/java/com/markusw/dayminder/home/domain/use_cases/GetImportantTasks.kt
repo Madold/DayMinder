@@ -3,10 +3,8 @@ package com.markusw.dayminder.home.domain.use_cases
 import com.markusw.dayminder.core.domain.repository.TasksRepository
 import javax.inject.Inject
 
-class GetTaskOrderedByTimestamp @Inject constructor(
+class GetImportantTasks @Inject constructor(
     private val repository: TasksRepository
 ) {
-
-    operator fun invoke() = repository.getTaskOrderedByTimestamp()
-
+    operator fun invoke() = repository.getImportantTasks()
 }

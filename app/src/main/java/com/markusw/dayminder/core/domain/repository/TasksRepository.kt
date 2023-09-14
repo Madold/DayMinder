@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface TasksRepository {
     suspend fun insertTask(task: TaskEntity)
     suspend fun deleteTask(task: TaskEntity)
-    fun getTaskOrderedByTimestamp(): Flow<List<TaskEntity>>
-    fun getTaskOrderedByTitle(): Flow<List<TaskEntity>>
+    fun getDailyTasks(): Flow<List<TaskEntity>>
+    fun getImportantTasks(): Flow<List<TaskEntity>>
 }

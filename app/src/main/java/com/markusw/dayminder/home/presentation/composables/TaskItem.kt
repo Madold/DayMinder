@@ -35,23 +35,29 @@ import androidx.compose.ui.unit.sp
 import com.example.dayminder.R
 import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.core.utils.TimeUtils
-import com.markusw.dayminder.home.presentation.HomeUiEvent
 import com.markusw.dayminder.ui.theme.DayMinderTheme
 
 @Composable
 fun TaskItem(
     task: Task,
-    onEvent: (HomeUiEvent) -> Unit,
+    onClick: () -> Unit,
+    onToggleClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val backgroundColor =
+        if (task.importance == Task.IMPORTANCE_HIGH) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.primaryContainer
+    val toggleBackgroundColor =
+        if (task.importance == Task.IMPORTANCE_HIGH) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onPrimaryContainer
 
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(15.dp))
-            .background(if (task.importance == Task.IMPORTANCE_HIGH) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.primaryContainer)
+            .clickable(onClick = onClick)
+            .background(backgroundColor)
             .padding(all = 12.dp)
-            .clickable { },
+        ,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -77,9 +83,9 @@ fun TaskItem(
 
         TaskToggle(
             isDone = task.isDone,
-            onEvent = onEvent,
-            backgroundColor = if (task.importance == Task.IMPORTANCE_HIGH) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onPrimaryContainer,
-            iconTint = if (task.importance == Task.IMPORTANCE_HIGH) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.primaryContainer
+            onClick = onToggleClick,
+            backgroundColor = toggleBackgroundColor,
+            iconTint = backgroundColor
         )
 
     }
@@ -118,7 +124,11 @@ private fun TaskScheduledTime(
 ) {
 
     val formattedTime = remember {
-        "${TimeUtils.formatHourFromTimestamp(timestamp)} ${TimeUtils.formatDateFromTimestamp(timestamp)}"
+        "${TimeUtils.formatHourFromTimestamp(timestamp)} ${
+            TimeUtils.formatDateFromTimestamp(
+                timestamp
+            )
+        }"
     }
 
     Row(
@@ -143,7 +153,7 @@ private fun TaskScheduledTime(
 @Composable
 private fun TaskToggle(
     isDone: Boolean,
-    onEvent: (HomeUiEvent) -> Unit,
+    onClick: () -> Unit,
     backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     iconTint: Color = MaterialTheme.colorScheme.onPrimaryContainer
 ) {
@@ -151,7 +161,7 @@ private fun TaskToggle(
         colors = IconButtonDefaults.iconButtonColors(
             containerColor = backgroundColor,
         ),
-        onClick = { }
+        onClick = onClick
     ) {
         AnimatedVisibility(
             visible = isDone,
@@ -170,23 +180,22 @@ private fun TaskToggle(
 @Preview(showBackground = true)
 @Composable
 private fun TaskItemPreview() {
-   DayMinderTheme(
-         darkTheme = false,
-         dynamicColor = false
-   ) {
-       TaskItem(
-           task = Task(
-               id = 1,
-               title = "Task 1",
-               description = "Description 1",
-               timestamp = TimeUtils.getDeviceHourInTimestamp(),
-               isDone = true,
-               isScheduled = false,
-               importance = Task.IMPORTANCE_NORMAL
-           ),
-           onEvent = {
-
-           }
-       )
-   }
+    DayMinderTheme(
+        darkTheme = false,
+        dynamicColor = false
+    ) {
+        TaskItem(
+            task = Task(
+                id = 1,
+                title = "Task 1",
+                description = "Description 1",
+                timestamp = TimeUtils.getDeviceHourInTimestamp(),
+                isDone = true,
+                isScheduled = false,
+                importance = Task.IMPORTANCE_NORMAL
+            ),
+            onClick = {},
+            onToggleClick = {}
+        )
+    }
 }

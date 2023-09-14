@@ -18,11 +18,10 @@ interface TaskDao {
     @Delete
     suspend fun deleteTask(task: TaskEntity)
 
-    @Query("SELECT * FROM $TASK_TABLE_NAME ORDER BY timestamp ASC")
-    fun getTaskOrderedByTimestamp(): Flow<List<TaskEntity>>
+    @Query("SELECT * FROM $TASK_TABLE_NAME ORDER BY importance ASC")
+    fun getDailyTasks(): Flow<List<TaskEntity>>
 
-    @Query("SELECT * FROM $TASK_TABLE_NAME ORDER BY title ASC")
-    fun getTaskOrderedByTitle(): Flow<List<TaskEntity>>
-
+    @Query("SELECT * FROM $TASK_TABLE_NAME WHERE importance = 1 ORDER BY TITLE ASC")
+    fun getImportantTasks(): Flow<List<TaskEntity>>
 
 }
