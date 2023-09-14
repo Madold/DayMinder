@@ -30,8 +30,6 @@ fun PermissionDialog(
     modifier: Modifier = Modifier
 ) {
 
-    println(isPermanentlyDeclined)
-
     Dialog(
         onDismissRequest = onDismiss,
         content = {

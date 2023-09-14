@@ -190,9 +190,9 @@ private fun TaskItemPreview() {
                 title = "Task 1",
                 description = "Description 1",
                 timestamp = TimeUtils.getDeviceHourInTimestamp(),
-                isDone = true,
-                isScheduled = false,
-                importance = Task.IMPORTANCE_NORMAL
+                isDone = false,
+                isScheduled = true,
+                importance = Task.IMPORTANCE_HIGH
             ),
             onClick = {},
             onToggleClick = {}

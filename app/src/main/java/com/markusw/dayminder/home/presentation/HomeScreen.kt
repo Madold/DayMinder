@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.DismissDirection
 import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,8 +29,8 @@ import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.dayminder.R
 import com.markusw.dayminder.core.presentation.Screens
+import com.markusw.dayminder.home.presentation.composables.DeleteTaskDialog
 import com.markusw.dayminder.home.presentation.composables.TaskFilterChip
 import com.markusw.dayminder.home.presentation.composables.TaskItem
 import kotlinx.coroutines.delay
@@ -97,24 +97,21 @@ fun HomeScreen(
                     state.taskList,
                     key = { task -> task.id }
                 ) { task ->
-                    var isExpanded by remember { mutableStateOf(true) }
+                    var isExpanded by rememberSaveable { mutableStateOf(true) }
+                    var isDeleteTaskDialogVisible by rememberSaveable { mutableStateOf(false) }
                     val dismissState = rememberDismissState(
                         confirmValueChange = { dismissValue ->
-
-                            if (dismissValue == DismissValue.DismissedToStart) {
-                                return@rememberDismissState false
+                            if (dismissValue == DismissValue.DismissedToEnd) {
+                                isDeleteTaskDialogVisible = true
+                                return@rememberDismissState true
                             }
-
-                            coroutineScope.launch {
-                                if (dismissValue == DismissValue.DismissedToEnd) {
-                                    isExpanded = false
-                                    delay(350)
-                                    onEvent(HomeUiEvent.DeleteTask(task))
-                                }
-                            }
-                            true
+                            false
                         },
+                        positionalThreshold = {
+                            150.toDp().toPx()
+                        }
                     )
+
 
                     val swipeBackground = when (dismissState.dismissDirection) {
                         DismissDirection.StartToEnd -> Color(0xFFFF1744)
@@ -139,13 +136,12 @@ fun HomeScreen(
                                         .clip(
                                             RoundedCornerShape(
                                                 topStart = 0.dp,
-                                                topEnd = 8.dp,
-                                                bottomEnd = 8.dp,
+                                                topEnd = 15.dp,
+                                                bottomEnd = 15.dp,
                                                 bottomStart = 0.dp
                                             )
                                         )
-                                        .background(swipeBackground)
-                                    ,
+                                        .background(swipeBackground),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Icon(
@@ -163,6 +159,38 @@ fun HomeScreen(
                                 )
                             }
                         )
+                    }
+
+                    if (isDeleteTaskDialogVisible) {
+                        DeleteTaskDialog(
+                            title = {
+                                Text(text = "Delete Task")
+                            },
+                            onConfirm = {
+                                coroutineScope.launch {
+                                    isDeleteTaskDialogVisible = false
+                                    dismissState.reset()
+                                    isExpanded = false
+                                    delay(350)
+                                    onEvent(HomeUiEvent.DeleteTask(task))
+                                }
+                            },
+                            onDismiss = {
+                                isDeleteTaskDialogVisible = false
+                                coroutineScope.launch {
+                                    dismissState.reset()
+                                }
+                            },
+                            onDismissRequest = {
+                                isDeleteTaskDialogVisible = false
+                                coroutineScope.launch {
+                                    dismissState.reset()
+                                }
+                            }
+                        ) {
+                            Text(text = "Are you sure you want to delete this task? This action cannot be undone.")
+                            Text(text = "Task name: ${task.title}")
+                        }
                     }
                 }
             }
