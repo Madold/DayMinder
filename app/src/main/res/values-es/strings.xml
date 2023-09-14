@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="task_title">Título de la tarea</string>
     <string name="task_description">Descripción</string>
     <string name="add_task">Crear tarea</string>
@@ -17,4 +16,6 @@
     <string name="post_notification_permission_permanently_denied">Lamentablemente, has decidido denegar permanentemente el permiso de enviar notificaciones. Sin este permiso, no podremos recordarte tus tareas programadas de manera efectiva. Si cambias de opinión en el futuro y deseas recibir recordatorios, puedes habilitar esta función en la configuración de tu dispositivo. Estamos aquí para ayudarte cuando estés listo.</string>
     <string name="permission_required">Permiso requerido</string>
     <string name="grant_permission">Conceder permiso</string>
+    <string name="tasks">Tareas</string>
+    <string name="completed">Completadas</string>
 </resources>

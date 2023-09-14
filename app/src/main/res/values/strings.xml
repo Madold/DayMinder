@@ -16,4 +16,6 @@
     <string name="post_notification_permission_permanently_denied">Unfortunately, you have chosen to permanently deny permission to send notifications. Without this permission, we will not be able to effectively remind you of your scheduled tasks. If you change your mind in the future and would like to receive reminders, you can enable this feature in your device settings. We\'re here to help you when you\'re ready.</string>
     <string name="permission_required">Permission required</string>
     <string name="grant_permission">Grant permission</string>
+    <string name="tasks">Tasks</string>
+    <string name="completed">Completed</string>
 </resources>
