@@ -111,7 +111,9 @@ fun TaskList(
                         TaskItem(
                             task = task,
                             onClick = { },
-                            onToggleClick = { }
+                            onToggleClick = {
+                                onEvent(HomeUiEvent.ToggleTask(task))
+                            }
                         )
                     }
                 )

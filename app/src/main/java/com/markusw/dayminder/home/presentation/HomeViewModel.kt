@@ -8,6 +8,7 @@ import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.home.domain.use_cases.DeleteTask
 import com.markusw.dayminder.home.domain.use_cases.GetDailyTasks
 import com.markusw.dayminder.home.domain.use_cases.GetImportantTasks
+import com.markusw.dayminder.home.domain.use_cases.ToggleTask
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,7 +25,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val deleteTask: DeleteTask,
     private val getDailyTask: GetDailyTasks,
-    private val getImportantTasks: GetImportantTasks
+    private val getImportantTasks: GetImportantTasks,
+    private val toggleTask: ToggleTask
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeState())
@@ -59,6 +61,12 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.DeleteTask -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     deleteTask(event.task)
+                }
+            }
+
+            is HomeUiEvent.ToggleTask -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    toggleTask(event.task)
                 }
             }
         }
