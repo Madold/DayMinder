@@ -1,4 +1,4 @@
-package com.markusw.dayminder.addtask.domain
+package com.markusw.dayminder.core.domain
 
 interface NotificationSchedulerService {
     fun scheduleNotification(item: NotificationItem)

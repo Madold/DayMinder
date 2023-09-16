@@ -1,12 +1,11 @@
-package com.markusw.dayminder.addtask.data
+package com.markusw.dayminder.core.data
 
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import androidx.core.content.getSystemService
 import com.markusw.dayminder.DayMinder
-import com.markusw.dayminder.addtask.domain.NotificationItem
+import com.markusw.dayminder.core.domain.NotificationItem
 import com.markusw.dayminder.core.utils.NotificationBuilder
 
 class NotificationReceiver : BroadcastReceiver() {

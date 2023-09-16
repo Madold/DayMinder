@@ -1,4 +1,4 @@
-package com.markusw.dayminder.addtask.domain
+package com.markusw.dayminder.core.domain
 
 data class NotificationItem(
     val id: Int,

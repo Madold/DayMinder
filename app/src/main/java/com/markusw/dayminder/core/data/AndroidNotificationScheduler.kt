@@ -1,11 +1,11 @@
-package com.markusw.dayminder.addtask.data
+package com.markusw.dayminder.core.data
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.markusw.dayminder.addtask.domain.NotificationItem
-import com.markusw.dayminder.addtask.domain.NotificationSchedulerService
+import com.markusw.dayminder.core.domain.NotificationItem
+import com.markusw.dayminder.core.domain.NotificationSchedulerService
 import java.util.TimeZone
 
 class AndroidNotificationScheduler(private val context: Context) : NotificationSchedulerService {

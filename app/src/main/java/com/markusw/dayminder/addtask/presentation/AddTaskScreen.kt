@@ -16,9 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,7 +25,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -61,6 +58,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.dayminder.R
+import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.ErrorText
 import com.markusw.dayminder.core.presentation.composables.TimePickerDialog
 import com.markusw.dayminder.core.utils.TimeUtils
@@ -118,13 +116,13 @@ fun AddTaskScreen(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                CreateTaskButton(
+                AppButton(
                     modifier = Modifier
                         .fillMaxWidth(0.9f),
                     onClick = {
                         if (!state.isTaskScheduled) {
                             onEvent(AddTaskUiEvent.SaveTask)
-                            return@CreateTaskButton
+                            return@AppButton
                         }
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -134,7 +132,7 @@ fun AddTaskScreen(
                                 ) != PackageManager.PERMISSION_GRANTED
                             ) {
                                 permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                                return@CreateTaskButton
+                                return@AppButton
                             }
                         }
 
@@ -328,23 +326,6 @@ fun AddTaskScreen(
             }
         )
     }
-
-
-}
-
-@Composable
-private fun CreateTaskButton(
-    onClick: () -> Unit,
-    content: @Composable RowScope.() -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        modifier = modifier,
-        contentPadding = PaddingValues(vertical = 16.dp),
-        onClick = onClick,
-        shape = RoundedCornerShape(15.dp),
-        content = content
-    )
 }
 
 @Composable

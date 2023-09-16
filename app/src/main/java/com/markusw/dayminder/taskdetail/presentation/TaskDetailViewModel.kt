@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.core.domain.use_cases.InsertTask
+import com.markusw.dayminder.taskdetail.domain.use_cases.CancelTaskReminder
 import com.markusw.dayminder.taskdetail.domain.use_cases.GetTaskById
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class TaskDetailViewModel @Inject constructor(
     private val getTaskById: GetTaskById,
     private val insertTask: InsertTask,
+    private val cancelTaskReminder: CancelTaskReminder,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -70,6 +72,10 @@ class TaskDetailViewModel @Inject constructor(
                         taskDetailChannel.send(TaskDetailEvent.ChangesAppliedSuccessfully)
                     }
                 }
+            }
+
+            is TaskDetailEvent.CancelTaskReminder -> {
+
             }
 
             else -> return

@@ -1,8 +1,8 @@
 package com.markusw.dayminder.di
 
 import android.content.Context
-import com.markusw.dayminder.addtask.data.AndroidNotificationScheduler
-import com.markusw.dayminder.addtask.domain.NotificationSchedulerService
+import com.markusw.dayminder.core.data.AndroidNotificationScheduler
+import com.markusw.dayminder.core.domain.NotificationSchedulerService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

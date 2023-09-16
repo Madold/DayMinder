@@ -3,8 +3,8 @@ package com.markusw.dayminder.addtask.presentation
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.markusw.dayminder.addtask.domain.NotificationItem
-import com.markusw.dayminder.addtask.domain.NotificationSchedulerService
+import com.markusw.dayminder.core.domain.NotificationItem
+import com.markusw.dayminder.core.domain.NotificationSchedulerService
 import com.markusw.dayminder.core.domain.use_cases.InsertTask
 import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.core.domain.use_cases.ValidateTaskTitle
