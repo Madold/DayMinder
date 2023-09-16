@@ -54,12 +54,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.dayminder.R
+import com.markusw.dayminder.core.presentation.composables.ErrorText
 import com.markusw.dayminder.core.presentation.composables.TimePickerDialog
 import com.markusw.dayminder.core.utils.TimeUtils
 import com.markusw.dayminder.ui.theme.DayMinderTheme
@@ -179,13 +181,15 @@ fun AddTaskScreen(
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = MaterialTheme.colorScheme.surface,
                             unfocusedBorderColor = MaterialTheme.colorScheme.surface,
-                            cursorColor = MaterialTheme.colorScheme.surface
+                            cursorColor = MaterialTheme.colorScheme.surface,
+                        ),
+                        shape = RoundedCornerShape(15.dp),
+                        textStyle = TextStyle(
+                            color = MaterialTheme.colorScheme.surface
                         )
                     )
                     AnimatedVisibility(visible = state.taskTitleError != null) {
-                        state.taskTitleError?.let { titleError ->
-                            Text(text = titleError.asString())
-                        }
+                        ErrorText(text = state.taskTitleError?.asString())
                     }
                     Text(
                         text = stringResource(id = R.string.task_description),
@@ -202,6 +206,10 @@ fun AddTaskScreen(
                             focusedBorderColor = MaterialTheme.colorScheme.surface,
                             unfocusedBorderColor = MaterialTheme.colorScheme.surface,
                             cursorColor = MaterialTheme.colorScheme.surface
+                        ),
+                        shape = RoundedCornerShape(15.dp),
+                        textStyle = TextStyle(
+                            color = MaterialTheme.colorScheme.surface
                         )
                     )
                 }
