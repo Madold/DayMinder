@@ -24,4 +24,7 @@ interface TaskDao {
     @Query("SELECT * FROM $TASK_TABLE_NAME WHERE importance = 1 ORDER BY title ASC")
     fun getImportantTasks(): Flow<List<TaskEntity>>
 
+    @Query("SELECT * FROM $TASK_TABLE_NAME WHERE id = :id")
+    suspend fun getTaskById(id: Int): TaskEntity
+
 }

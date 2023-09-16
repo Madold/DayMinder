@@ -45,6 +45,7 @@ fun TaskList(
     tasks: List<Task>,
     modifier: Modifier = Modifier,
     onEvent: (HomeUiEvent) -> Unit = {},
+    onItemClick: (Task) -> Unit = {}
 ) {
 
     val coroutineScope = rememberCoroutineScope()
@@ -110,7 +111,7 @@ fun TaskList(
                     dismissContent = {
                         TaskItem(
                             task = task,
-                            onClick = { },
+                            onClick = { onItemClick(task) },
                             onToggleClick = {
                                 onEvent(HomeUiEvent.ToggleTask(task))
                             }

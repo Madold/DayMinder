@@ -12,8 +12,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.markusw.dayminder.addtask.presentation.AddTaskEvent
 import com.markusw.dayminder.addtask.presentation.AddTaskScreen
 import com.markusw.dayminder.addtask.presentation.AddTaskViewModel
@@ -21,6 +23,9 @@ import com.markusw.dayminder.core.ext.openAppSettings
 import com.markusw.dayminder.core.presentation.composables.PermissionDialog
 import com.markusw.dayminder.home.presentation.HomeScreen
 import com.markusw.dayminder.home.presentation.HomeViewModel
+import com.markusw.dayminder.taskdetail.presentation.TaskDetailScreen
+import com.markusw.dayminder.taskdetail.presentation.TaskDetailEvent
+import com.markusw.dayminder.taskdetail.presentation.TaskDetailViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -101,6 +106,34 @@ fun AppNavHost(
                         }
                     )
                 }
+        }
+
+        composable(
+            route = "${Screens.TaskDetail.route}/{id}",
+            arguments = listOf(
+                navArgument("id") { type = NavType.IntType }
+            )
+        ) {
+            val viewModel = hiltViewModel<TaskDetailViewModel>()
+            val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+            LaunchedEffect(key1 = viewModel.taskDetailEvents) {
+                viewModel.taskDetailEvents.collectLatest { event ->
+                    when (event) {
+                        is TaskDetailEvent.ChangesAppliedSuccessfully -> {
+                            navController.popBackStack()
+                        }
+                        else -> return@collectLatest
+                    }
+                }
+            }
+
+            TaskDetailScreen(
+                state = state,
+                onEvent = viewModel::onEvent,
+                navController = navController
+            )
+
         }
 
     }

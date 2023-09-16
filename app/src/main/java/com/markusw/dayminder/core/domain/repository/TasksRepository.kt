@@ -8,4 +8,5 @@ interface TasksRepository {
     suspend fun deleteTask(task: TaskEntity)
     fun getDailyTasks(): Flow<List<TaskEntity>>
     fun getImportantTasks(): Flow<List<TaskEntity>>
+    suspend fun getTaskById(id: Int): TaskEntity
 }

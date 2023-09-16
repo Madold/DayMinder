@@ -9,5 +9,8 @@ sealed class Screens(
     data object AddTask : Screens(
         route = "add_task"
     )
+    data object TaskDetail : Screens(
+        route = "task_detail"
+    )
 
 }

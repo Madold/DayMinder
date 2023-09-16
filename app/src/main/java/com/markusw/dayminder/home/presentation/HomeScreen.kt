@@ -85,14 +85,20 @@ fun HomeScreen(
                 TaskList(
                     tasks = unCompletedTasks,
                     onEvent = onEvent,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onItemClick = { task ->
+                        navController.navigate("${Screens.TaskDetail.route}/${task.id}")
+                    }
                 )
                 Text(text = stringResource(id = R.string.completed))
 
                 TaskList(
                     tasks = completedTasks,
                     onEvent = onEvent,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onItemClick = { task ->
+                        navController.navigate("${Screens.TaskDetail.route}/${task.id}")
+                    }
                 )
             }
         }
