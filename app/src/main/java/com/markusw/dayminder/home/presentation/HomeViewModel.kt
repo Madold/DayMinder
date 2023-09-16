@@ -34,13 +34,21 @@ class HomeViewModel @Inject constructor(
             SortType.MyDay -> getDailyTask()
             SortType.Important -> getImportantTasks()
         }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        emptyList()
+    )
     val uiState = combine(_uiState, _sortType, _tasks) { uiState, sortType, tasks ->
         uiState.copy(
             taskList = tasks.map { it.toDomain() },
             sortType = sortType,
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), HomeState())
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000L),
+        HomeState()
+    )
 
     fun onEvent(event: HomeUiEvent) {
         when (event) {
