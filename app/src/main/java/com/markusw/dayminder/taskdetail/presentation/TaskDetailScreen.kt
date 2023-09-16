@@ -5,7 +5,9 @@ package com.markusw.dayminder.taskdetail.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -27,6 +29,8 @@ fun TaskDetailScreen(
     onEvent: (TaskDetailEvent) -> Unit,
     navController: NavController = rememberNavController()
 ) {
+
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
@@ -61,6 +65,7 @@ fun TaskDetailScreen(
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize()
+                    .verticalScroll(scrollState)
             ) {
                 BasicTextField(
                     value = state.selectedTask?.title ?: "",
