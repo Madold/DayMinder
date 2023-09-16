@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeState())
-    private val _sortType = MutableStateFlow(SortType.MyDay)
+    private val _sortType = MutableStateFlow<SortType>(SortType.MyDay)
     private val _tasks = _sortType.flatMapLatest { sortType ->
         when (sortType) {
             SortType.MyDay -> getDailyTask()

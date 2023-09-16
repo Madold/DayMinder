@@ -19,4 +19,6 @@
     <string name="tasks">Tareas</string>
     <string name="completed">Completadas</string>
     <string name="mark_as_important">Marcar como importante</string>
+    <string name="my_day">Mi día</string>
+    <string name="important">Importante</string>
 </resources>

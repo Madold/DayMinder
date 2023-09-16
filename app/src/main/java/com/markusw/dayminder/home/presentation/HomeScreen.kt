@@ -34,7 +34,10 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 SortType.values().forEach { sortType ->
                     Row(
@@ -44,7 +47,7 @@ fun HomeScreen(
                             onClick = { onEvent(HomeUiEvent.ChangeSortType(sortType)) },
                             isSelected = state.sortType == sortType
                         ) {
-                            Text(text = sortType.name)
+                            Text(text = sortType.text.asString())
                         }
                     }
                 }
