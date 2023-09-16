@@ -171,22 +171,13 @@ fun AddTaskScreen(
                         text = stringResource(id = R.string.task_title),
                         color = MaterialTheme.colorScheme.surface
                     )
-                    OutlinedTextField(
+                    TextInputField(
                         modifier = Modifier.fillMaxWidth(),
                         value = state.taskTitle,
                         onValueChange = {
                             onEvent(AddTaskUiEvent.ChangeTaskTitle(it))
                         },
                         isError = state.taskTitleError != null,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = MaterialTheme.colorScheme.surface,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
-                            cursorColor = MaterialTheme.colorScheme.surface,
-                        ),
-                        shape = RoundedCornerShape(15.dp),
-                        textStyle = TextStyle(
-                            color = MaterialTheme.colorScheme.surface
-                        )
                     )
                     AnimatedVisibility(visible = state.taskTitleError != null) {
                         ErrorText(text = state.taskTitleError?.asString())
@@ -195,22 +186,13 @@ fun AddTaskScreen(
                         text = stringResource(id = R.string.task_description),
                         color = MaterialTheme.colorScheme.surface
                     )
-                    OutlinedTextField(
+                    TextInputField(
                         modifier = Modifier.fillMaxWidth(),
                         value = state.taskDescription,
                         onValueChange = {
                             onEvent(AddTaskUiEvent.ChangeTaskDescription(it))
                         },
-                        maxLines = 5,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = MaterialTheme.colorScheme.surface,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
-                            cursorColor = MaterialTheme.colorScheme.surface
-                        ),
-                        shape = RoundedCornerShape(15.dp),
-                        textStyle = TextStyle(
-                            color = MaterialTheme.colorScheme.surface
-                        )
+                        maxLines = 5
                     )
                 }
                 Column(
@@ -362,6 +344,32 @@ private fun CreateTaskButton(
         onClick = onClick,
         shape = RoundedCornerShape(15.dp),
         content = content
+    )
+}
+
+@Composable
+private fun TextInputField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    maxLines: Int = Int.MAX_VALUE
+) {
+    OutlinedTextField(
+        modifier = modifier.fillMaxWidth(),
+        value = value,
+        onValueChange = onValueChange,
+        isError = isError,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = MaterialTheme.colorScheme.surface,
+            unfocusedBorderColor = MaterialTheme.colorScheme.surface,
+            cursorColor = MaterialTheme.colorScheme.surface,
+        ),
+        shape = RoundedCornerShape(15.dp),
+        textStyle = TextStyle(
+            color = MaterialTheme.colorScheme.surface
+        ),
+        maxLines = maxLines
     )
 }
 
