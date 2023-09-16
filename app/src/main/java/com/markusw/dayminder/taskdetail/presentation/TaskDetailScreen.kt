@@ -106,7 +106,7 @@ fun TaskDetailScreen(
                            contentAlignment = Alignment.Center
                        ) {
                            AppButton(
-                               onClick = { onEvent(TaskDetailEvent.CancelTaskReminder(it)) }
+                               onClick = { onEvent(TaskDetailEvent.CancelTaskReminder) }
                            ) {
                                Icon(
                                    painter = painterResource(id = R.drawable.ic_cancel_alarm),
