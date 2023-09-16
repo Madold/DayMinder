@@ -74,6 +74,9 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
 
+                val unCompletedTasks = remember(state.taskList) {
+                    state.taskList.filter { task -> !task.isDone }
+                }
                 val completedTasks = remember(state.taskList) {
                     state.taskList.filter { task -> task.isDone }
                 }
@@ -81,16 +84,16 @@ fun HomeScreen(
                 Text(text = stringResource(id = R.string.tasks))
 
                 TaskList(
-                    tasks = state.taskList,
+                    tasks = unCompletedTasks,
                     onEvent = onEvent,
-                    modifier = Modifier.fillMaxHeight(0.5f)
+                    modifier = Modifier.weight(1f)
                 )
                 Text(text = stringResource(id = R.string.completed))
 
                 TaskList(
                     tasks = completedTasks,
                     onEvent = onEvent,
-                    modifier = Modifier.fillMaxHeight(0.5f)
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
