@@ -6,15 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.markusw.dayminder.core.presentation.AppNavHost
-import com.markusw.dayminder.home.presentation.HomeScreen
-import com.markusw.dayminder.home.presentation.HomeViewModel
 import com.markusw.dayminder.ui.theme.DayMinderTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,9 +25,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    AppNavHost(
-                        navController = navController
-                    )
+                    AppNavHost(navController)
                 }
             }
         }
