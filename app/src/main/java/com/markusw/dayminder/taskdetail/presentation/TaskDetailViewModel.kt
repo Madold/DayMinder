@@ -96,11 +96,8 @@ class TaskDetailViewModel @Inject constructor(
                 ).also {
                     viewModelScope.launch(Dispatchers.IO) {
                         insertTask(it)
+                        taskDetailChannel.send(TaskDetailEvent.TaskReminderCanceledSuccessfully)
                     }
-                }
-
-                viewModelScope.launch {
-                    taskDetailChannel.send(TaskDetailEvent.TaskReminderCanceledSuccessfully)
                 }
             }
 
