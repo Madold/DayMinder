@@ -119,38 +119,43 @@ class AddTaskViewModel @Inject constructor(
             return
         }
 
-        if (isTaskScheduled) {
-            val endDateTimestamp = _uiState.value.selectedDateInMillis
-            val hour = _uiState.value.selectedHour
-            val minute = _uiState.value.selectedMinute
 
-            notificationSchedulerService.scheduleNotification(
-                NotificationItem(
-                    id = UUID.randomUUID().hashCode(),
-                    title = taskTitle,
-                    message = taskDescription,
-                    timestamp = TimeUtils.computeTimeStamp(
-                        endDateTimestamp,
-                        hour,
-                        minute
-                    )
-                )
-            )
-        }
 
         resetTaskFields()
 
         viewModelScope.launch(Dispatchers.IO) {
-            insertTask(
-                Task(
-                    title = taskTitle,
-                    description = taskDescription,
-                    timestamp = TimeUtils.getDeviceHourInTimestamp(),
-                    isDone = false,
-                    isScheduled = isTaskScheduled,
-                    importance = if (isImportant) Task.IMPORTANCE_HIGH else Task.IMPORTANCE_NORMAL
-                )
+            val createdTask = Task(
+                title = taskTitle,
+                description = taskDescription,
+                timestamp = TimeUtils.getDeviceHourInTimestamp(),
+                isDone = false,
+                isScheduled = isTaskScheduled,
+                importance = if (isImportant) Task.IMPORTANCE_HIGH else Task.IMPORTANCE_NORMAL,
+                notificationId = if (isTaskScheduled) UUID.randomUUID().hashCode() else null
             )
+
+            insertTask(createdTask)
+
+            if (isTaskScheduled) {
+                val endDateTimestamp = _uiState.value.selectedDateInMillis
+                val hour = _uiState.value.selectedHour
+                val minute = _uiState.value.selectedMinute
+
+                createdTask.notificationId?.let { id ->
+                    notificationSchedulerService.scheduleNotification(
+                        NotificationItem(
+                            id = id,
+                            title = createdTask.title,
+                            message = createdTask.description,
+                            timestamp = TimeUtils.computeTimeStamp(
+                                endDateTimestamp,
+                                hour,
+                                minute
+                            )
+                        )
+                    )
+                }
+            }
             taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
         }
     }

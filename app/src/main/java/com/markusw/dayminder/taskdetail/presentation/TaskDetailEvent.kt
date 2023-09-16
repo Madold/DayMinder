@@ -9,4 +9,5 @@ sealed interface TaskDetailEvent {
     data object SaveChanges: TaskDetailEvent
     data object ChangesAppliedSuccessfully: TaskDetailEvent
     data class CancelTaskReminder(val task: Task): TaskDetailEvent
+    data object TaskReminderCanceledSuccessfully: TaskDetailEvent
 }

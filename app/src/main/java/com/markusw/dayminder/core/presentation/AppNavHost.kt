@@ -3,6 +3,7 @@ package com.markusw.dayminder.core.presentation
 import android.Manifest
 import android.app.Activity
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.dayminder.R
 import com.markusw.dayminder.addtask.presentation.AddTaskEvent
 import com.markusw.dayminder.addtask.presentation.AddTaskScreen
 import com.markusw.dayminder.addtask.presentation.AddTaskViewModel
@@ -23,8 +25,8 @@ import com.markusw.dayminder.core.ext.openAppSettings
 import com.markusw.dayminder.core.presentation.composables.PermissionDialog
 import com.markusw.dayminder.home.presentation.HomeScreen
 import com.markusw.dayminder.home.presentation.HomeViewModel
-import com.markusw.dayminder.taskdetail.presentation.TaskDetailScreen
 import com.markusw.dayminder.taskdetail.presentation.TaskDetailEvent
+import com.markusw.dayminder.taskdetail.presentation.TaskDetailScreen
 import com.markusw.dayminder.taskdetail.presentation.TaskDetailViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -114,6 +116,7 @@ fun AppNavHost(
                 navArgument("id") { type = NavType.IntType }
             )
         ) {
+            val context = LocalContext.current
             val viewModel = hiltViewModel<TaskDetailViewModel>()
             val state by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -122,6 +125,14 @@ fun AppNavHost(
                     when (event) {
                         is TaskDetailEvent.ChangesAppliedSuccessfully -> {
                             navController.popBackStack()
+                        }
+                        is TaskDetailEvent.TaskReminderCanceledSuccessfully -> {
+                            navController.popBackStack()
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.reminder_canceled_sucsessfully),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         else -> return@collectLatest
                     }

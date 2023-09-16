@@ -10,6 +10,7 @@ data class Task(
     val isScheduled: Boolean,
     val importance: Int = IMPORTANCE_NORMAL,
     val isDone: Boolean = false,
+    val notificationId: Int? = null
 ) {
     companion object {
         const val IMPORTANCE_HIGH = 1
@@ -24,7 +25,8 @@ fun Task.toEntity() = TaskEntity(
     timestamp = timestamp,
     isDone = isDone,
     isScheduled = isScheduled,
-    importance = importance
+    importance = importance,
+    notificationId = notificationId
 )
 
 fun TaskEntity.toDomain() = Task(
@@ -34,5 +36,6 @@ fun TaskEntity.toDomain() = Task(
     timestamp = timestamp,
     isDone = isDone,
     isScheduled = isScheduled,
-    importance = importance
+    importance = importance,
+    notificationId = notificationId
 )

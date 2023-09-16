@@ -23,4 +23,5 @@
     <string name="important">Important</string>
     <string name="task_detail">Task detail</string>
     <string name="cancel_reminder">Cancel reminder</string>
+    <string name="reminder_canceled_sucsessfully">Reminder canceled</string>
 </resources>

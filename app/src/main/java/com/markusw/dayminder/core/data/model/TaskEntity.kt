@@ -13,5 +13,6 @@ data class TaskEntity(
     val timestamp: Long,
     val isDone: Boolean,
     val isScheduled: Boolean,
-    val importance: Int
+    val importance: Int,
+    val notificationId: Int? = null
 )

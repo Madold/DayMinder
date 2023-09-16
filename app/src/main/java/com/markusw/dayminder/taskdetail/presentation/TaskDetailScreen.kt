@@ -100,14 +100,13 @@ fun TaskDetailScreen(
 
                 state.selectedTask?.let {
                     if (it.isScheduled) {
-
                        Box(
                            modifier = Modifier
                                .fillMaxWidth(),
                            contentAlignment = Alignment.Center
                        ) {
                            AppButton(
-                               onClick = { /*TODO*/ }
+                               onClick = { onEvent(TaskDetailEvent.CancelTaskReminder(it)) }
                            ) {
                                Icon(
                                    painter = painterResource(id = R.drawable.ic_cancel_alarm),

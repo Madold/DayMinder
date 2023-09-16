@@ -3,6 +3,7 @@ package com.markusw.dayminder.taskdetail.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.markusw.dayminder.core.domain.NotificationItem
 import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.core.domain.use_cases.InsertTask
 import com.markusw.dayminder.taskdetail.domain.use_cases.CancelTaskReminder
@@ -75,11 +76,41 @@ class TaskDetailViewModel @Inject constructor(
             }
 
             is TaskDetailEvent.CancelTaskReminder -> {
+                val task = _uiState.value.selectedTask ?: return
 
+                task.notificationId?.let { id ->
+                    cancelTaskReminder(
+                        NotificationItem(
+                            id = id,
+                            title = "",
+                            message = "",
+                            timestamp = 0L
+                        )
+                    )
+                }
+
+                task.copy(
+                    isScheduled = false,
+                    notificationId = null,
+                    timestamp = 0L
+                ).also {
+                    viewModelScope.launch(Dispatchers.IO) {
+                        insertTask(it)
+                    }
+                }
+
+                viewModelScope.launch {
+                    taskDetailChannel.send(TaskDetailEvent.TaskReminderCanceledSuccessfully)
+                }
             }
 
             else -> return
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        taskDetailChannel.close()
     }
 
 }
