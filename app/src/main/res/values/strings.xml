@@ -18,4 +18,5 @@
     <string name="grant_permission">Grant permission</string>
     <string name="tasks">Tasks</string>
     <string name="completed">Completed</string>
+    <string name="mark_as_important">Mark as important</string>
 </resources>

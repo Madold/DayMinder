@@ -43,56 +43,7 @@ class AddTaskViewModel @Inject constructor(
                 _uiState.update { it.copy(taskTitle = event.taskTitle) }
             }
 
-            is AddTaskUiEvent.SaveTask -> {
-                val taskTitle = _uiState.value.taskTitle
-                val taskDescription = _uiState.value.taskDescription
-                val taskTitleValidationResult = validateTaskTitle(taskTitle)
-                val isTaskScheduled = _uiState.value.isTaskScheduled
-
-                if (!taskTitleValidationResult.success) {
-                    _uiState.update {
-                        it.copy(
-                            taskTitleError = taskTitleValidationResult.errorMessage,
-                        )
-                    }
-                    return
-                }
-
-                if (isTaskScheduled) {
-                    val endDateTimestamp = _uiState.value.selectedDateInMillis
-                    val hour = _uiState.value.selectedHour
-                    val minute = _uiState.value.selectedMinute
-
-                    notificationSchedulerService.scheduleNotification(
-                        NotificationItem(
-                            id = UUID.randomUUID().hashCode(),
-                            title = taskTitle,
-                            message = taskDescription,
-                            timestamp = TimeUtils.computeTimeStamp(
-                                endDateTimestamp,
-                                hour,
-                                minute
-                            )
-                        )
-                    )
-                }
-
-                resetTaskFields()
-
-                viewModelScope.launch(Dispatchers.IO) {
-                    insertTask(
-                        Task(
-                            title = taskTitle,
-                            description = taskDescription,
-                            timestamp = TimeUtils.getDeviceHourInTimestamp(),
-                            isDone = false,
-                            isScheduled = isTaskScheduled
-                        )
-                    )
-                    taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
-                }
-
-            }
+            is AddTaskUiEvent.SaveTask -> handleTaskCreation()
 
             is AddTaskUiEvent.HideDatePicker -> {
                 _uiState.update { it.copy(isDatePickerVisible = false) }
@@ -125,6 +76,10 @@ class AddTaskViewModel @Inject constructor(
             is AddTaskUiEvent.ChangeTaskScheduled -> {
                 _uiState.update { it.copy(isTaskScheduled = event.scheduled) }
             }
+
+            is AddTaskUiEvent.ChangeTaskImportance -> {
+                _uiState.update { it.copy(isTaskImportant = event.isImportant) }
+            }
         }
     }
 
@@ -145,6 +100,58 @@ class AddTaskViewModel @Inject constructor(
     fun onPermissionResult(permission: String, isGranted: Boolean) {
         if (!isGranted) {
             visiblePermissionDialogQueue.add(permission)
+        }
+    }
+
+    private fun handleTaskCreation() {
+        val taskTitle = _uiState.value.taskTitle
+        val taskDescription = _uiState.value.taskDescription
+        val taskTitleValidationResult = validateTaskTitle(taskTitle)
+        val isTaskScheduled = _uiState.value.isTaskScheduled
+        val isImportant = _uiState.value.isTaskImportant
+
+        if (!taskTitleValidationResult.success) {
+            _uiState.update {
+                it.copy(
+                    taskTitleError = taskTitleValidationResult.errorMessage,
+                )
+            }
+            return
+        }
+
+        if (isTaskScheduled) {
+            val endDateTimestamp = _uiState.value.selectedDateInMillis
+            val hour = _uiState.value.selectedHour
+            val minute = _uiState.value.selectedMinute
+
+            notificationSchedulerService.scheduleNotification(
+                NotificationItem(
+                    id = UUID.randomUUID().hashCode(),
+                    title = taskTitle,
+                    message = taskDescription,
+                    timestamp = TimeUtils.computeTimeStamp(
+                        endDateTimestamp,
+                        hour,
+                        minute
+                    )
+                )
+            )
+        }
+
+        resetTaskFields()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            insertTask(
+                Task(
+                    title = taskTitle,
+                    description = taskDescription,
+                    timestamp = TimeUtils.getDeviceHourInTimestamp(),
+                    isDone = false,
+                    isScheduled = isTaskScheduled,
+                    importance = if (isImportant) Task.IMPORTANCE_HIGH else Task.IMPORTANCE_NORMAL
+                )
+            )
+            taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
         }
     }
 
