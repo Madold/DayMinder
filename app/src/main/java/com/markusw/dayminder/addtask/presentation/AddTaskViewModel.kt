@@ -119,8 +119,6 @@ class AddTaskViewModel @Inject constructor(
             return
         }
 
-
-
         resetTaskFields()
 
         viewModelScope.launch(Dispatchers.IO) {
