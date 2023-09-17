@@ -36,6 +36,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.dayminder.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.markusw.dayminder.core.presentation.Screens
+import com.markusw.dayminder.core.utils.TimeUtils
 import com.markusw.dayminder.home.presentation.composables.TaskFilterChip
 import com.markusw.dayminder.home.presentation.composables.TaskList
 
@@ -58,25 +59,36 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier
+            Column(
+                Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                SortType.values().forEach { sortType ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        TaskFilterChip(
-                            onClick = { onEvent(HomeUiEvent.ChangeSortType(sortType)) },
-                            isSelected = state.sortType == sortType
+                Text(
+                    text = stringResource(id = TimeUtils.getGreetingStringId()),
+                    style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    SortType.values().forEach { sortType ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = sortType.text.asString())
+                            TaskFilterChip(
+                                onClick = { onEvent(HomeUiEvent.ChangeSortType(sortType)) },
+                                isSelected = state.sortType == sortType
+                            ) {
+                                Text(text = sortType.text.asString())
+                            }
                         }
                     }
                 }
             }
+
         },
         floatingActionButton = {
             FloatingActionButton(

@@ -1,7 +1,9 @@
 package com.markusw.dayminder.core.utils
 
+import com.example.dayminder.R
 import timber.log.Timber
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -57,6 +59,20 @@ object TimeUtils {
         val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
         sdf.timeZone = TimeZone.getTimeZone("GMT")
         return sdf.format(date)
+    }
+
+    fun getGreetingStringId(): Int {
+        val currentHour = LocalTime.now()
+        val morningHour = LocalTime.of(6, 0)
+        val afternoonHour = LocalTime.of(12, 0)
+        val eveningHour = LocalTime.of(18, 0)
+
+        return when {
+            currentHour.isBefore(morningHour) -> R.string.morning_greeting
+            currentHour.isBefore(afternoonHour) -> R.string.afternoon_greeting
+            currentHour.isBefore(eveningHour) -> R.string.afternoon_greeting
+            else -> R.string.evening_greeting
+        }
     }
 
 }

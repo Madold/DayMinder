@@ -30,4 +30,9 @@
     <string name="task_list_empty">Nada por aquí :)</string>
     <string name="delete_task">Borrar tarea</string>
     <string name="delete_task_confirm_message">Se eliminará la tarea: %s</string>
+
+    <string name="morning_greeting">Buenos días</string>
+    <string name="afternoon_greeting">Buenas tardes</string>
+    <string name="evening_greeting">Buenas noches</string>
+
 </resources>

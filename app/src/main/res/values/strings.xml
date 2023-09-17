@@ -30,4 +30,9 @@
     <string name="task_list_empty">Nothing here :)</string>
     <string name="delete_task">Delete task</string>
     <string name="delete_task_confirm_message">This will permanently delete the task: %s</string>
+
+    <string name="morning_greeting">Good morning</string>
+    <string name="afternoon_greeting">Good afternoon</string>
+    <string name="evening_greeting">Good evening</string>
+
 </resources>
