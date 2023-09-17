@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalLayoutApi::class, ExperimentalLayoutApi::class,
+    ExperimentalLayoutApi::class
+)
+
 package com.markusw.dayminder.home.presentation.composables
 
 import androidx.compose.animation.AnimatedVisibility
@@ -8,6 +12,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -29,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,10 +69,10 @@ fun TaskItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier.weight(1f)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 TaskTitle(
@@ -85,7 +92,7 @@ fun TaskItem(
             isDone = task.isDone,
             onClick = onToggleClick,
             backgroundColor = toggleBackgroundColor,
-            iconTint = backgroundColor
+            iconTint = backgroundColor,
         )
 
     }
@@ -154,10 +161,12 @@ private fun TaskScheduledTime(
 private fun TaskToggle(
     isDone: Boolean,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    iconTint: Color = MaterialTheme.colorScheme.onPrimaryContainer
+    iconTint: Color = MaterialTheme.colorScheme.onPrimaryContainer,
 ) {
     IconButton(
+        modifier = modifier,
         colors = IconButtonDefaults.iconButtonColors(
             containerColor = backgroundColor,
         ),
@@ -187,12 +196,12 @@ private fun TaskItemPreview() {
         TaskItem(
             task = Task(
                 id = 1,
-                title = "Task 1",
+                title = "This is a long tittle for my task by the way, it can be larger",
                 description = "Description 1",
                 timestamp = TimeUtils.getDeviceHourInTimestamp(),
                 isDone = false,
                 isScheduled = true,
-                importance = Task.IMPORTANCE_HIGH
+                importance = Task.IMPORTANCE_NORMAL
             ),
             onClick = {},
             onToggleClick = {}
