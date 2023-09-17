@@ -11,6 +11,7 @@
     <string name="cancel">Cancel</string>
     <string name="dismiss">Dismiss</string>
     <string name="confirm">Confirm</string>
+    <string name="delete">Delete</string>
     <string name="remember">Remember</string>
     <string name="post_notification_permission_denied">To remind you of your scheduled tasks, we need your permission to send notifications. Please allow us to help you stay organized.</string>
     <string name="post_notification_permission_permanently_denied">Unfortunately, you have chosen to permanently deny permission to send notifications. Without this permission, we will not be able to effectively remind you of your scheduled tasks. If you change your mind in the future and would like to receive reminders, you can enable this feature in your device settings. We\'re here to help you when you\'re ready.</string>
@@ -25,4 +26,6 @@
     <string name="cancel_reminder">Cancel reminder</string>
     <string name="reminder_canceled_sucsessfully">Reminder canceled</string>
     <string name="task_list_empty">Nothing here :)</string>
+    <string name="delete_task">Delete task</string>
+    <string name="delete_task_confirm_message">This will permanently delete the task: %s</string>
 </resources>

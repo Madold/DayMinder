@@ -4,17 +4,22 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.dayminder.R
+import com.markusw.dayminder.core.presentation.composables.AppButton
+import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
 
 @Composable
 fun DeleteTaskDialog(
@@ -34,18 +39,24 @@ fun DeleteTaskDialog(
             Column(
                 modifier = Modifier
                     .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                title()
-                content()
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    title()
+                    content()
+                }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    TextButton(onClick = onConfirm) {
-                        Text(text = "Yes")
+                    OutlinedAppButton(onClick = onDismiss) {
+                        Text(text = stringResource(id = R.string.cancel))
                     }
-                    TextButton(onClick = onDismiss) {
-                        Text(text = "No")
+                    Spacer(modifier = Modifier.width(8.dp))
+                    AppButton(onClick = onConfirm) {
+                        Text(text = stringResource(id = R.string.delete))
                     }
                 }
             }

@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.dayminder.R
 import com.markusw.dayminder.core.domain.model.Task
@@ -123,7 +124,10 @@ fun TaskList(
             if (isDeleteTaskDialogVisible) {
                 DeleteTaskDialog(
                     title = {
-                        Text(text = "Delete Task")
+                        Text(
+                            text = stringResource(id = R.string.delete_task),
+                            style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                        )
                     },
                     onConfirm = {
                         coroutineScope.launch {
@@ -147,8 +151,7 @@ fun TaskList(
                         }
                     }
                 ) {
-                    Text(text = "Are you sure you want to delete this task? This action cannot be undone.")
-                    Text(text = "Task name: ${task.title}")
+                    Text(text = stringResource(id = R.string.delete_task_confirm_message, task.title))
                 }
             }
         }

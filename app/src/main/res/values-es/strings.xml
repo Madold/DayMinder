@@ -11,6 +11,7 @@
     <string name="cancel">Cancelar</string>
     <string name="dismiss">Ocultar</string>
     <string name="confirm">Confirmar</string>
+    <string name="delete">Borrar</string>
     <string name="remember">Recordar</string>
     <string name="post_notification_permission_denied">Para recordarte tus tareas programadas, necesitamos tu permiso para enviar notificaciones. Por favor, permítenos ayudarte a mantenerte organizado. </string>
     <string name="post_notification_permission_permanently_denied">Lamentablemente, has decidido denegar permanentemente el permiso de enviar notificaciones. Sin este permiso, no podremos recordarte tus tareas programadas de manera efectiva. Si cambias de opinión en el futuro y deseas recibir recordatorios, puedes habilitar esta función en la configuración de tu dispositivo. Estamos aquí para ayudarte cuando estés listo.</string>
@@ -25,4 +26,6 @@
     <string name="cancel_reminder">Cancelar recordatorio</string>
     <string name="reminder_canceled_sucsessfully">Recordatorio cancelado</string>
     <string name="task_list_empty">Nada por aquí :)</string>
+    <string name="delete_task">Borrar tarea</string>
+    <string name="delete_task_confirm_message">Se eliminará la tarea: %s</string>
 </resources>
