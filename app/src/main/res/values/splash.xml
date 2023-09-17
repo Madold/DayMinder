@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.DayMinder.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#CCE5FF</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/app_icon</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/dayminder_icon</item>
         <item name="postSplashScreenTheme">@style/Theme.DayMinder</item>
     </style>
 </resources>

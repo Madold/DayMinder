@@ -22,7 +22,9 @@ class MainActivity : ComponentActivity() {
 
             val navController = rememberNavController()
 
-            DayMinderTheme {
+            DayMinderTheme(
+                darkTheme = false
+            ) {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
                     modifier = Modifier.fillMaxSize()

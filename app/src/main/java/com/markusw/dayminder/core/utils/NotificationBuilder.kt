@@ -17,7 +17,7 @@ object NotificationBuilder {
         chanelId: String,
         contentText: String,
         title: String,
-        @DrawableRes smallIcon: Int = R.drawable.ic_launcher_foreground
+        @DrawableRes smallIcon: Int = R.drawable.ic_stat_bell
     ): Notification {
 
         val intent = Intent(context, MainActivity::class.java)
