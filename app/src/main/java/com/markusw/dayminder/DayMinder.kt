@@ -4,6 +4,9 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import com.example.dayminder.BuildConfig
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -23,6 +26,7 @@ class DayMinder : Application() {
 
         if (BuildConfig.DEBUG) {
             setupTimber()
+            disableFirebaseCollection()
         }
 
         setupNotificationChannels()
@@ -43,6 +47,11 @@ class DayMinder : Application() {
         })
 
         Timber.d("Starting app...")
+    }
+
+    private fun disableFirebaseCollection() {
+        Firebase.analytics.setAnalyticsCollectionEnabled(false)
+        Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
     }
 
     private fun setupNotificationChannels() {
