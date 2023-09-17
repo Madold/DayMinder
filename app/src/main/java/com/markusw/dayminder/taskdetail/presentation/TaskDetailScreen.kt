@@ -87,9 +87,11 @@ fun TaskDetailScreen(
                         onEvent(TaskDetailEvent.ChangeTaskTitle(it))
                     },
                     placeholder = {
-                        Text(text = stringResource(id = R.string.task_title))
+                        Text(text = stringResource(id = R.string.task_title), style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface))
                     },
-                    textStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                    textStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                    errorText = state.taskTitleError?.asString(),
+                    isError = state.taskTitleError != null
                 )
                 TransparentTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -98,8 +100,9 @@ fun TaskDetailScreen(
                         onEvent(TaskDetailEvent.ChangeTaskDescription(it))
                     },
                     placeholder = {
-                        Text(text = stringResource(id = R.string.task_description))
-                    }
+                        Text(text = stringResource(id = R.string.task_description), style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface))
+                    },
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                 )
 
                 state.selectedTask?.let {

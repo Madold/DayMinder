@@ -1,5 +1,6 @@
 package com.markusw.dayminder.core.presentation.composables
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,7 +45,9 @@ fun TransparentTextField(
                 placeholder()
             }
         }
-        ErrorText(text = errorText)
+        AnimatedVisibility(visible = isError) {
+            ErrorText(text = errorText)
+        }
     }
 
 }

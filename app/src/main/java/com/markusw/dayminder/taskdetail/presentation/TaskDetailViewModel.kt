@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.markusw.dayminder.core.domain.NotificationItem
 import com.markusw.dayminder.core.domain.model.toDomain
 import com.markusw.dayminder.core.domain.use_cases.InsertTask
+import com.markusw.dayminder.core.domain.use_cases.ValidateTaskTitle
 import com.markusw.dayminder.taskdetail.domain.use_cases.CancelTaskReminder
 import com.markusw.dayminder.taskdetail.domain.use_cases.GetTaskById
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,6 +24,7 @@ class TaskDetailViewModel @Inject constructor(
     private val getTaskById: GetTaskById,
     private val insertTask: InsertTask,
     private val cancelTaskReminder: CancelTaskReminder,
+    private val validateTaskTitle: ValidateTaskTitle,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -67,6 +69,19 @@ class TaskDetailViewModel @Inject constructor(
             }
 
             is TaskDetailEvent.SaveChanges -> {
+
+                val task = _uiState.value.selectedTask ?: return
+                val titleValidationResult = validateTaskTitle(task.title)
+
+                if (!titleValidationResult.success) {
+                    _uiState.update {
+                        it.copy(
+                            taskTitleError = titleValidationResult.errorMessage
+                        )
+                    }
+                    return
+                }
+
                 viewModelScope.launch(Dispatchers.IO) {
                     _uiState.value.selectedTask?.let { task ->
                         insertTask(task)
