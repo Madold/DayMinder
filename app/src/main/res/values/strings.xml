@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">DayMinder</string>
-    <string name="task_title">Task title</string>
-    <string name="task_description">Task description</string>
+    <string name="task_title">Task title *</string>
+    <string name="task_description">Add a description (optional)</string>
     <string name="add_task">Add task</string>
     <string name="title_blank_error">Title can\'t be blank.</string>
     <string name="create_task">Create task</string>
@@ -24,4 +24,5 @@
     <string name="task_detail">Task detail</string>
     <string name="cancel_reminder">Cancel reminder</string>
     <string name="reminder_canceled_sucsessfully">Reminder canceled</string>
+    <string name="task_list_empty">Nothing here :)</string>
 </resources>

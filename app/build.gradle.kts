@@ -71,6 +71,7 @@ dependencies {
     val lifecycleRuntimeComposeVersion = "2.6.2"
     val timberVersion = "5.0.1"
     val loggerVersion = "2.2.0"
+    val lottieComposeVersion = "6.1.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -103,6 +104,9 @@ dependencies {
 
     //Logger
     implementation("com.orhanobut:logger:$loggerVersion")
+
+    //Lottie
+    implementation("com.airbnb.android:lottie-compose:$lottieComposeVersion")
 
 
     //Test dependencies

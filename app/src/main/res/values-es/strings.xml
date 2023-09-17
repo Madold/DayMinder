@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="task_title">Título de la tarea</string>
-    <string name="task_description">Descripción</string>
+    <string name="task_title">Título de la tarea *</string>
+    <string name="task_description">Añade una descripción (opcional)</string>
     <string name="add_task">Crear tarea</string>
     <string name="title_blank_error">El título no puede estar en blanco.</string>
     <string name="create_task">Crear tarea</string>
@@ -24,4 +24,5 @@
     <string name="task_detail">Detalles de la tarea</string>
     <string name="cancel_reminder">Cancelar recordatorio</string>
     <string name="reminder_canceled_sucsessfully">Recordatorio cancelado</string>
+    <string name="task_list_empty">Nada por aquí :)</string>
 </resources>
