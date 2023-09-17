@@ -76,6 +76,7 @@ dependencies {
     val lottieComposeVersion = "6.1.0"
     val systemUiControllerVersion = "0.33.1-alpha"
     val firebaseBomVersion = "32.3.1"
+    val splashScreenApiVersion = "1.0.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -123,6 +124,11 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     //Crashlytics
     implementation("com.google.firebase:firebase-crashlytics-ktx")
+
+    //Splash screen API
+    implementation("androidx.core:core-splashscreen:$splashScreenApiVersion")
+
+
 
 
 
