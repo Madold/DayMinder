@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.markusw.dayminder.core.domain.NotificationItem
 import com.markusw.dayminder.core.domain.NotificationSchedulerService
-import com.markusw.dayminder.core.domain.use_cases.InsertTask
 import com.markusw.dayminder.core.domain.model.Task
+import com.markusw.dayminder.core.domain.use_cases.InsertTask
 import com.markusw.dayminder.core.domain.use_cases.ValidateTaskTitle
 import com.markusw.dayminder.core.utils.TimeUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -127,36 +127,39 @@ class AddTaskViewModel @Inject constructor(
             val createdTask = Task(
                 title = taskTitle,
                 description = taskDescription,
-                timestamp = TimeUtils.getDeviceHourInTimestamp(),
+                timestamp = 0L,
                 isDone = false,
                 isScheduled = isTaskScheduled,
                 importance = if (isImportant) Task.IMPORTANCE_HIGH else Task.IMPORTANCE_NORMAL,
                 notificationId = if (isTaskScheduled) UUID.randomUUID().hashCode() else null
             )
 
-            insertTask(createdTask)
+            if (!isTaskScheduled) {
+                insertTask(createdTask)
+                taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
+                return@launch
+            }
 
-            if (isTaskScheduled) {
-                val endDateTimestamp = _uiState.value.selectedDateInMillis
-                val hour = _uiState.value.selectedHour
-                val minute = _uiState.value.selectedMinute
+            val endDateTimestamp = _uiState.value.selectedDateInMillis
+            val hour = _uiState.value.selectedHour
+            val minute = _uiState.value.selectedMinute
 
-                createdTask.notificationId?.let { id ->
+            createdTask.copy(
+                timestamp = TimeUtils.computeTimeStamp(endDateTimestamp, hour, minute)
+            ).also {
+                it.notificationId?.let { id ->
                     notificationSchedulerService.scheduleNotification(
                         NotificationItem(
                             id = id,
                             title = createdTask.title,
                             message = createdTask.description,
-                            timestamp = TimeUtils.computeTimeStamp(
-                                endDateTimestamp,
-                                hour,
-                                minute
-                            )
+                            timestamp = it.timestamp
                         )
                     )
                 }
+                insertTask(it)
+                taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
             }
-            taskEventChannel.send(AddTaskEvent.TaskSavedSuccessfully)
         }
     }
 
