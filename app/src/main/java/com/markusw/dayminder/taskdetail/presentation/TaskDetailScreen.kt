@@ -86,7 +86,7 @@ fun TaskDetailScreen(
                     placeholder = {
                         Text(text = stringResource(id = R.string.task_title))
                     },
-                    textStyle = MaterialTheme.typography.titleLarge
+                    textStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                 )
                 TransparentTextField(
                     value = state.selectedTask?.description ?: "",
