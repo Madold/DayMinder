@@ -9,6 +9,7 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -46,7 +47,9 @@ fun TaskList(
     tasks: List<Task>,
     modifier: Modifier = Modifier,
     onEvent: (HomeUiEvent) -> Unit = {},
-    onItemClick: (Task) -> Unit = {}
+    onItemClick: (Task) -> Unit = {},
+    onSwipeToEnd: (Task) -> Unit = {},
+    onSwipeToStart: (Task) -> Unit = {},
 ) {
 
     val coroutineScope = rememberCoroutineScope()
@@ -63,11 +66,20 @@ fun TaskList(
             var isDeleteTaskDialogVisible by rememberSaveable { mutableStateOf(false) }
             val dismissState = rememberDismissState(
                 confirmValueChange = { dismissValue ->
-                    if (dismissValue == DismissValue.DismissedToEnd) {
-                        isDeleteTaskDialogVisible = true
-                        return@rememberDismissState true
+                    when (dismissValue) {
+                        DismissValue.DismissedToEnd -> {
+                            isDeleteTaskDialogVisible = true
+                            onSwipeToEnd(task)
+                            return@rememberDismissState true
+                        }
+
+                        DismissValue.DismissedToStart -> {
+                            onSwipeToStart(task)
+                            return@rememberDismissState false
+                        }
+
+                        else -> false
                     }
-                    false
                 },
                 positionalThreshold = {
                     150.toDp().toPx()
@@ -77,6 +89,7 @@ fun TaskList(
 
             val swipeBackground = when (dismissState.dismissDirection) {
                 DismissDirection.StartToEnd -> Color(0xFFFF1744)
+                DismissDirection.EndToStart -> Color(0xFF1DE9B6)
                 else -> Color.Transparent
             }
 
@@ -97,18 +110,28 @@ fun TaskList(
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(15.dp))
                                 .background(swipeBackground)
-                                .padding(horizontal = 8.dp)
-                            ,
-                            verticalAlignment = Alignment.CenterVertically
+                                .padding(horizontal = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_trash_can),
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.surface,
-                            )
+                            if (dismissState.dismissDirection == DismissDirection.StartToEnd) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_trash_can),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.surface,
+                                )
+                            }
+                            Spacer(modifier = Modifier)
+                            if (dismissState.dismissDirection == DismissDirection.EndToStart) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_pen),
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.surface,
+                                )
+                            }
                         }
                     },
-                    directions = setOf(DismissDirection.StartToEnd),
+                    directions = setOf(DismissDirection.StartToEnd, DismissDirection.EndToStart),
                     dismissContent = {
                         TaskItem(
                             task = task,
@@ -151,7 +174,12 @@ fun TaskList(
                         }
                     }
                 ) {
-                    Text(text = stringResource(id = R.string.delete_task_confirm_message, task.title))
+                    Text(
+                        text = stringResource(
+                            id = R.string.delete_task_confirm_message,
+                            task.title
+                        )
+                    )
                 }
             }
         }

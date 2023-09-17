@@ -130,6 +130,9 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxHeight(),
                         onItemClick = { task ->
                             navController.navigate("${Screens.TaskDetail.route}/${task.id}")
+                        },
+                        onSwipeToStart = { task ->
+                            navController.navigate("${Screens.TaskDetail.route}/${task.id}")
                         }
                     )
 
@@ -152,6 +155,9 @@ fun HomeScreen(
                         onEvent = onEvent,
                         modifier = Modifier.fillMaxHeight(),
                         onItemClick = { task ->
+                            navController.navigate("${Screens.TaskDetail.route}/${task.id}")
+                        },
+                        onSwipeToStart = { task ->
                             navController.navigate("${Screens.TaskDetail.route}/${task.id}")
                         }
                     )
