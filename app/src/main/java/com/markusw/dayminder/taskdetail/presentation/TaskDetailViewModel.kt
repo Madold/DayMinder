@@ -75,6 +75,23 @@ class TaskDetailViewModel @Inject constructor(
                 }
             }
 
+            is TaskDetailEvent.ShowTaskReminderCancelDialog -> {
+                _uiState.update {
+                    it.copy(
+                        isCancelReminderDialogVisible = true
+                    )
+                }
+            }
+
+
+            is TaskDetailEvent.HideTaskReminderCancelDialog -> {
+                _uiState.update {
+                    it.copy(
+                        isCancelReminderDialogVisible = false
+                    )
+                }
+            }
+
             is TaskDetailEvent.CancelTaskReminder -> {
                 val task = _uiState.value.selectedTask ?: return
 

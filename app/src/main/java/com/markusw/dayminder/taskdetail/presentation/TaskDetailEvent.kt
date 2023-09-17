@@ -8,4 +8,6 @@ sealed interface TaskDetailEvent {
     data object ChangesAppliedSuccessfully: TaskDetailEvent
     data object CancelTaskReminder: TaskDetailEvent
     data object TaskReminderCanceledSuccessfully: TaskDetailEvent
+    data object HideTaskReminderCancelDialog: TaskDetailEvent
+    data object ShowTaskReminderCancelDialog: TaskDetailEvent
 }

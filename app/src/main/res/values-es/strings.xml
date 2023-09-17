@@ -23,6 +23,8 @@
     <string name="my_day">Mi día</string>
     <string name="important">Importante</string>
     <string name="task_detail">Detalles de la tarea</string>
+    <string name="cancel_reminder_message">¿Seguro que quieres cancelar el recordatorio de esta tarea?</string>
+    <string name="yes">Sí</string>
     <string name="cancel_reminder">Cancelar recordatorio</string>
     <string name="reminder_canceled_sucsessfully">Recordatorio cancelado</string>
     <string name="task_list_empty">Nada por aquí :)</string>

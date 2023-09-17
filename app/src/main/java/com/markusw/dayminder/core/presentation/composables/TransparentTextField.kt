@@ -2,6 +2,7 @@ package com.markusw.dayminder.core.presentation.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,9 +29,10 @@ fun TransparentTextField(
     Column {
         Box(
             modifier = modifier,
-            contentAlignment = Alignment.CenterStart
+            contentAlignment = Alignment.TopStart
         ) {
             BasicTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = value,
                 onValueChange = onValueChange,
                 maxLines = maxLines,

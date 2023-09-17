@@ -30,6 +30,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.dayminder.R
 import com.markusw.dayminder.core.presentation.composables.AppButton
+import com.markusw.dayminder.core.presentation.composables.AppDialog
+import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
 import com.markusw.dayminder.core.presentation.composables.TransparentTextField
 
 @Composable
@@ -79,6 +81,7 @@ fun TaskDetailScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 TransparentTextField(
+                    modifier = Modifier.fillMaxWidth(),
                     value = state.selectedTask?.title ?: "",
                     onValueChange = {
                         onEvent(TaskDetailEvent.ChangeTaskTitle(it))
@@ -89,6 +92,7 @@ fun TaskDetailScreen(
                     textStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                 )
                 TransparentTextField(
+                    modifier = Modifier.fillMaxWidth(),
                     value = state.selectedTask?.description ?: "",
                     onValueChange = {
                         onEvent(TaskDetailEvent.ChangeTaskDescription(it))
@@ -100,25 +104,60 @@ fun TaskDetailScreen(
 
                 state.selectedTask?.let {
                     if (it.isScheduled) {
-                       Box(
-                           modifier = Modifier
-                               .fillMaxWidth(),
-                           contentAlignment = Alignment.Center
-                       ) {
-                           AppButton(
-                               onClick = { onEvent(TaskDetailEvent.CancelTaskReminder) }
-                           ) {
-                               Icon(
-                                   painter = painterResource(id = R.drawable.ic_cancel_alarm),
-                                   contentDescription = null
-                               )
-                               Spacer(modifier = Modifier.width(8.dp))
-                               Text(text = stringResource(id = R.string.cancel_reminder))
-                           }
-                       }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            AppButton(
+                                onClick = { onEvent(TaskDetailEvent.ShowTaskReminderCancelDialog) }
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_cancel_alarm),
+                                    contentDescription = null
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(text = stringResource(id = R.string.cancel_reminder))
+                            }
+                        }
                     }
                 }
             }
+
+            if (state.isCancelReminderDialogVisible) {
+                AppDialog(
+                    onDismissRequest = {
+                        onEvent(TaskDetailEvent.HideTaskReminderCancelDialog)
+                    },
+                    title = {
+                        Text(
+                            text = stringResource(id = R.string.cancel_reminder),
+                            style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                        )
+                    },
+                    buttons = {
+                        OutlinedAppButton(
+                            onClick = {
+                                onEvent(TaskDetailEvent.HideTaskReminderCancelDialog)
+                            }
+                        ) {
+                            Text(text = stringResource(id = R.string.cancel))
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        AppButton(
+                            onClick = {
+                                onEvent(TaskDetailEvent.CancelTaskReminder)
+                                onEvent(TaskDetailEvent.HideTaskReminderCancelDialog)
+                            }
+                        ) {
+                            Text(text = stringResource(id = R.string.yes))
+                        }
+                    }
+                ) {
+                    Text(text = stringResource(id = R.string.cancel_reminder_message))
+                }
+            }
+
         }
     )
 
