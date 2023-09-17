@@ -162,7 +162,7 @@ fun AddTaskScreen(
                                 bottomEnd = 15.dp
                             )
                         )
-                        .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 16.dp),
+                        .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
