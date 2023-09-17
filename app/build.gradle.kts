@@ -72,6 +72,7 @@ dependencies {
     val timberVersion = "5.0.1"
     val loggerVersion = "2.2.0"
     val lottieComposeVersion = "6.1.0"
+    val systemUiControllerVersion = "0.33.1-alpha"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -107,6 +108,9 @@ dependencies {
 
     //Lottie
     implementation("com.airbnb.android:lottie-compose:$lottieComposeVersion")
+
+    //System UI Controller
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$systemUiControllerVersion")
 
 
     //Test dependencies
