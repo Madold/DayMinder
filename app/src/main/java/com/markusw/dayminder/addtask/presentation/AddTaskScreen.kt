@@ -63,6 +63,7 @@ import com.example.dayminder.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.ErrorText
+import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
 import com.markusw.dayminder.core.presentation.composables.TimePickerDialog
 import com.markusw.dayminder.core.utils.TimeUtils
 import com.markusw.dayminder.ui.theme.DayMinderTheme
@@ -241,7 +242,7 @@ fun AddTaskScreen(
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Text(text = stringResource(id = R.string.date))
-                                OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowDatePicker) }) {
+                                OutlinedAppButton(onClick = { onEvent(AddTaskUiEvent.ShowDatePicker) }) {
                                     Icon(
                                         imageVector = Icons.Default.DateRange,
                                         contentDescription = null
@@ -268,7 +269,7 @@ fun AddTaskScreen(
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Text(text = stringResource(id = R.string.time))
-                                OutlinedButton(onClick = { onEvent(AddTaskUiEvent.ShowTimePicker) }) {
+                                OutlinedAppButton(onClick = { onEvent(AddTaskUiEvent.ShowTimePicker) }) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_clock),
                                         contentDescription = null
