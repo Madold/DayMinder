@@ -72,7 +72,6 @@ dependencies {
     val timberVersion = "5.0.1"
     val loggerVersion = "2.2.0"
     val lottieComposeVersion = "6.1.0"
-    val systemUiControllerVersion = "0.33.1-alpha"
     val firebaseBomVersion = "32.3.1"
     val splashScreenApiVersion = "1.0.1"
 
@@ -111,9 +110,6 @@ dependencies {
     //Lottie
     implementation("com.airbnb.android:lottie-compose:$lottieComposeVersion")
 
-    //System UI Controller
-    implementation("com.google.accompanist:accompanist-systemuicontroller:$systemUiControllerVersion")
-
     //Firebase
     //Bom
     // Import the BoM for the Firebase platform
@@ -125,10 +121,6 @@ dependencies {
 
     //Splash screen API
     implementation("androidx.core:core-splashscreen:$splashScreenApiVersion")
-
-
-
-
 
 
     //Test dependencies

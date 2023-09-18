@@ -43,7 +43,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -59,7 +58,6 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.dayminder.R
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.ErrorText
 import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
@@ -75,14 +73,12 @@ fun AddTaskScreen(
     onEvent: (AddTaskUiEvent) -> Unit = {},
 ) {
 
-    val systemUiController = rememberSystemUiController()
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = System.currentTimeMillis()
     )
     val timePickerState = rememberTimePickerState()
     val scrollState = rememberScrollState()
     val context = LocalContext.current
-    val primaryColor = MaterialTheme.colorScheme.primary
 
     val formattedDate by remember {
         derivedStateOf {
@@ -95,12 +91,6 @@ fun AddTaskScreen(
         }
     }
 
-    SideEffect {
-        systemUiController.setStatusBarColor(
-            color = primaryColor,
-            darkIcons = true
-        )
-    }
 
     Scaffold(
         topBar = {
