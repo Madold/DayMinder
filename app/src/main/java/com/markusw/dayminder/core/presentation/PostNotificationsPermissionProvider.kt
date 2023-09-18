@@ -1,6 +1,6 @@
 package com.markusw.dayminder.core.presentation
 
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 
 class PostNotificationsPermissionProvider : PermissionTextProvider {
     override fun getDescription(isPermanentlyDeclined: Boolean): UiText {

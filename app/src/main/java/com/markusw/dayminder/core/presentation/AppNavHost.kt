@@ -17,7 +17,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.addtask.presentation.AddTaskEvent
 import com.markusw.dayminder.addtask.presentation.AddTaskScreen
 import com.markusw.dayminder.addtask.presentation.AddTaskViewModel

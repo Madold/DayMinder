@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.dayminder"
+    namespace = "com.markusw.dayminder"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.dayminder"
+        applicationId = "com.markusw.dayminder"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

@@ -39,7 +39,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.core.utils.TimeUtils
 import com.markusw.dayminder.ui.theme.DayMinderTheme

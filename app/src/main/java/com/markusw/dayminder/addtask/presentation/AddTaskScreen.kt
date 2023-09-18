@@ -57,7 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.ErrorText
 import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton

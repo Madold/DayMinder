@@ -32,7 +32,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.presentation.Screens
 import com.markusw.dayminder.core.utils.TimeUtils
 import com.markusw.dayminder.home.presentation.composables.TaskFilterChip

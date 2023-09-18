@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.presentation.PermissionTextProvider
 
 @Composable

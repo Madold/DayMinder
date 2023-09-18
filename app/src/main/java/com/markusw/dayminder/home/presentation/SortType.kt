@@ -1,6 +1,6 @@
 package com.markusw.dayminder.home.presentation
 
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.presentation.UiText
 
 

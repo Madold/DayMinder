@@ -1,6 +1,6 @@
 package com.markusw.dayminder.core.domain.use_cases
 
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.domain.ValidationResult
 import com.markusw.dayminder.core.presentation.UiText
 import javax.inject.Inject

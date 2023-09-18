@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.MainActivity
 
 object NotificationBuilder {

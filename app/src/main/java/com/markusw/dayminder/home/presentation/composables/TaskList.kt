@@ -36,7 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.core.domain.model.Task
 import com.markusw.dayminder.home.presentation.HomeUiEvent
 import kotlinx.coroutines.delay

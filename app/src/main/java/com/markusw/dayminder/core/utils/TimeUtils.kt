@@ -1,6 +1,6 @@
 package com.markusw.dayminder.core.utils
 
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.time.LocalTime

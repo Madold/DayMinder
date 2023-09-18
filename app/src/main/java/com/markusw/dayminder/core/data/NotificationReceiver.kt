@@ -4,7 +4,7 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.example.dayminder.R
+import com.markusw.dayminder.R
 import com.markusw.dayminder.DayMinder
 import com.markusw.dayminder.core.domain.NotificationItem
 import com.markusw.dayminder.core.utils.NotificationBuilder
