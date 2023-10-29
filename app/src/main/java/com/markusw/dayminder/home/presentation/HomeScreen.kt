@@ -1,4 +1,4 @@
-
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.markusw.dayminder.home.presentation
 
@@ -6,18 +6,26 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.BottomAppBarDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -47,12 +55,13 @@ fun HomeScreen(
 ) {
 
     Scaffold(
+        contentWindowInsets = WindowInsets.systemBars,
         topBar = {
             Column(
-                Modifier
+                modifier = Modifier
                     .fillMaxWidth()
+                    .windowInsetsPadding(TopAppBarDefaults.windowInsets)
                     .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
                     text = stringResource(id = TimeUtils.getGreetingStringId()),
@@ -93,28 +102,35 @@ fun HomeScreen(
             )
         },
         bottomBar = {
-            AdmobBanner()
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(BottomAppBarDefaults.windowInsets)
+            ) {
+                AdmobBanner()
+            }
         },
         content = {
+
+            val unCompletedTasks = remember(state.taskList) {
+                state.taskList.filter { task -> !task.isDone }
+            }
+            val unCompletedTasksCount by remember(unCompletedTasks) {
+                derivedStateOf { unCompletedTasks.size }
+            }
+            val completedTasks = remember(state.taskList) {
+                state.taskList.filter { task -> task.isDone }
+            }
+            val completedTasksCount by remember(completedTasks) {
+                derivedStateOf { completedTasks.size }
+            }
+
             Column(
                 modifier = Modifier
                     .padding(it)
                     .padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-
-                val unCompletedTasks = remember(state.taskList) {
-                    state.taskList.filter { task -> !task.isDone }
-                }
-                val unCompletedTasksCount by remember(unCompletedTasks) {
-                    derivedStateOf { unCompletedTasks.size }
-                }
-                val completedTasks = remember(state.taskList) {
-                    state.taskList.filter { task -> task.isDone }
-                }
-                val completedTasksCount by remember(completedTasks) {
-                    derivedStateOf { completedTasks.size }
-                }
 
                 Text(text = "${stringResource(id = R.string.tasks)} (${unCompletedTasksCount})")
 
