@@ -23,17 +23,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.markusw.dayminder.R
+import com.markusw.dayminder.core.ext.showInterstitialAd
 import com.markusw.dayminder.core.presentation.composables.AdmobBanner
 import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.AppDialog
 import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
 import com.markusw.dayminder.core.presentation.composables.TransparentTextField
+import com.markusw.dayminder.core.utils.AdUtils
 
 @Composable
 fun TaskDetailScreen(
@@ -43,6 +46,7 @@ fun TaskDetailScreen(
 ) {
 
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -51,7 +55,14 @@ fun TaskDetailScreen(
                     Text(text = stringResource(id = R.string.task_detail))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+
+                        if (AdUtils.shouldShowInterstitialAd()) {
+                            context.showInterstitialAd()
+                        }
+
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_left),
                             contentDescription = null
@@ -73,12 +84,7 @@ fun TaskDetailScreen(
             }
         },
         bottomBar = {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                AdmobBanner()
-            }
+            AdmobBanner()
         },
         content = { padding ->
             Column(
@@ -96,7 +102,10 @@ fun TaskDetailScreen(
                         onEvent(TaskDetailEvent.ChangeTaskTitle(it))
                     },
                     placeholder = {
-                        Text(text = stringResource(id = R.string.task_title), style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface))
+                        Text(
+                            text = stringResource(id = R.string.task_title),
+                            style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                        )
                     },
                     textStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                     errorText = state.taskTitleError?.asString(),
@@ -109,7 +118,10 @@ fun TaskDetailScreen(
                         onEvent(TaskDetailEvent.ChangeTaskDescription(it))
                     },
                     placeholder = {
-                        Text(text = stringResource(id = R.string.task_description), style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface))
+                        Text(
+                            text = stringResource(id = R.string.task_description),
+                            style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                        )
                     },
                     textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                 )

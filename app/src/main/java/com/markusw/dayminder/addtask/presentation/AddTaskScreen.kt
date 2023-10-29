@@ -119,8 +119,6 @@ fun AddTaskScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
 
-                AdmobBanner()
-
                 AppButton(
                     modifier = Modifier
                         .fillMaxWidth(0.9f),
@@ -147,6 +145,8 @@ fun AddTaskScreen(
                         Text(text = stringResource(id = R.string.create_task))
                     }
                 )
+
+                AdmobBanner()
             }
         },
         content = { padding ->

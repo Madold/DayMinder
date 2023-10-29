@@ -34,6 +34,7 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.markusw.dayminder.R
 import com.markusw.dayminder.core.presentation.Screens
+import com.markusw.dayminder.core.presentation.composables.AdmobBanner
 import com.markusw.dayminder.core.utils.TimeUtils
 import com.markusw.dayminder.home.presentation.composables.TaskFilterChip
 import com.markusw.dayminder.home.presentation.composables.TaskList
@@ -90,6 +91,9 @@ fun HomeScreen(
                     )
                 }
             )
+        },
+        bottomBar = {
+            AdmobBanner()
         },
         content = {
             Column(
