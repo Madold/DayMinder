@@ -74,6 +74,7 @@ dependencies {
     val lottieComposeVersion = "6.1.0"
     val firebaseBomVersion = "32.3.1"
     val splashScreenApiVersion = "1.0.1"
+    val playServicesAdsVersion = "22.4.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -121,6 +122,9 @@ dependencies {
 
     //Splash screen API
     implementation("androidx.core:core-splashscreen:$splashScreenApiVersion")
+
+    //Play services ads
+    implementation("com.google.android.gms:play-services-ads:$playServicesAdsVersion")
 
 
     //Test dependencies

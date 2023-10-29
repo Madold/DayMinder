@@ -3,6 +3,7 @@ package com.markusw.dayminder
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
@@ -27,6 +28,8 @@ class DayMinder : Application() {
             setupTimber()
             disableFirebaseCollection()
         }
+
+        MobileAds.initialize(this)
 
         setupNotificationChannels()
     }
