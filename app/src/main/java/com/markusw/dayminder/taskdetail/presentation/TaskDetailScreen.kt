@@ -86,13 +86,7 @@ fun TaskDetailScreen(
             }
         },
         bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .windowInsetsPadding(BottomAppBarDefaults.windowInsets)
-            ) {
-                AdmobBanner()
-            }
+            AdmobBanner(modifier = Modifier.windowInsetsPadding(BottomAppBarDefaults.windowInsets))
         },
         content = { padding ->
             Column(
