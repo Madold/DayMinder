@@ -33,11 +33,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.markusw.dayminder.R
 import com.markusw.dayminder.core.domain.model.Task
+import com.markusw.dayminder.core.ext.showInterstitialAd
+import com.markusw.dayminder.core.utils.AdUtils
 import com.markusw.dayminder.home.presentation.HomeUiEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -53,6 +56,7 @@ fun TaskList(
 ) {
 
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     LazyColumn(
         modifier = modifier,
@@ -137,7 +141,15 @@ fun TaskList(
                             task = task,
                             onClick = { onItemClick(task) },
                             onToggleClick = {
-                                onEvent(HomeUiEvent.ToggleTask(task))
+                                if (!task.isDone && AdUtils.shouldShowInterstitialAd()) {
+                                    context.showInterstitialAd(
+                                        onAdDismissed = {
+                                            onEvent(HomeUiEvent.ToggleTask(task))
+                                        }
+                                    )
+                                } else {
+                                    onEvent(HomeUiEvent.ToggleTask(task))
+                                }
                             }
                         )
                     }
@@ -159,6 +171,11 @@ fun TaskList(
                             isExpanded = false
                             delay(350)
                             onEvent(HomeUiEvent.DeleteTask(task))
+
+                            if (AdUtils.shouldShowInterstitialAd()) {
+                                context.showInterstitialAd()
+                            }
+
                         }
                     },
                     onDismiss = {

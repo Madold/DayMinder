@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.markusw.dayminder.R
+import com.markusw.dayminder.core.presentation.composables.AdmobBanner
 import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.AppDialog
 import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
@@ -69,6 +70,14 @@ fun TaskDetailScreen(
                     painter = painterResource(id = R.drawable.ic_save),
                     contentDescription = null
                 )
+            }
+        },
+        bottomBar = {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                AdmobBanner()
             }
         },
         content = { padding ->
