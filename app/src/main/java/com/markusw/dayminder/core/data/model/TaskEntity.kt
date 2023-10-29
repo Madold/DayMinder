@@ -2,7 +2,7 @@ package com.markusw.dayminder.core.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.markusw.dayminder.core.Constants.TASK_TABLE_NAME
+import com.markusw.dayminder.core.utils.Constants.TASK_TABLE_NAME
 
 @Entity(tableName = TASK_TABLE_NAME)
 data class TaskEntity(

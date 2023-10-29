@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
-import com.markusw.dayminder.core.Constants.TASK_TABLE_NAME
 import com.markusw.dayminder.core.data.model.TaskEntity
+import com.markusw.dayminder.core.utils.Constants.TASK_TABLE_NAME
 import kotlinx.coroutines.flow.Flow
 
 

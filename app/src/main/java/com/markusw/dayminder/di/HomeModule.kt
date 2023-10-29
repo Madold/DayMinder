@@ -2,11 +2,11 @@ package com.markusw.dayminder.di
 
 import android.content.Context
 import androidx.room.Room
-import com.markusw.dayminder.core.Constants.TASK_TABLE_NAME
 import com.markusw.dayminder.core.data.database.TaskDao
 import com.markusw.dayminder.core.data.database.TaskDatabase
 import com.markusw.dayminder.core.data.repository.AndroidTaskRepository
 import com.markusw.dayminder.core.domain.repository.TasksRepository
+import com.markusw.dayminder.core.utils.Constants.TASK_TABLE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

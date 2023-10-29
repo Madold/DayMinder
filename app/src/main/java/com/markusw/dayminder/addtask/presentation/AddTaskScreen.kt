@@ -14,7 +14,6 @@ import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,6 +56,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.markusw.dayminder.R
+import com.markusw.dayminder.core.presentation.composables.AdmobBanner
 import com.markusw.dayminder.core.presentation.composables.AppButton
 import com.markusw.dayminder.core.presentation.composables.ErrorText
 import com.markusw.dayminder.core.presentation.composables.OutlinedAppButton
@@ -113,10 +113,14 @@ fun AddTaskScreen(
             )
         },
         bottomBar = {
-            Box(
+            Column(
                 modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+
+                AdmobBanner()
+
                 AppButton(
                     modifier = Modifier
                         .fillMaxWidth(0.9f),
